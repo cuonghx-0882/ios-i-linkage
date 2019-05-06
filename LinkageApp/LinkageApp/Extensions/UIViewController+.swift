@@ -6,15 +6,29 @@
 //  Copyright © 2019 Sun*. All rights reserved.
 //
 
+import SVProgressHUD
+
 extension UIViewController {
-    func showError(message: String?, completion: (() -> Void)? = nil) {
-        let alertc = UIAlertController(title: "Error",
-                                       message: message,
-                                       preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .cancel) { _ in
-            completion?()
+    func hideKeyboardWhenTappedAround() {
+        let tap = UITapGestureRecognizer(target: self,
+                                         action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    func progessAnimation(_ show: Bool) {
+        if show {
+            SVProgressHUD.show()
+            view.isUserInteractionEnabled = false
+            view.alpha = 0.5
+        } else {
+            SVProgressHUD.dismiss()
+            view.isUserInteractionEnabled = true
+            view.alpha = 1
         }
-        alertc.addAction(okAction)
-        present(alertc, animated: true, completion: nil)
     }
 }
