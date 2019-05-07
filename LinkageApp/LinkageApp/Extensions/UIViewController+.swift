@@ -9,6 +9,7 @@
 import SVProgressHUD
 
 extension UIViewController {
+    
     func hideKeyboardWhenTappedAround() {
         let tap = UITapGestureRecognizer(target: self,
                                          action: #selector(UIViewController.dismissKeyboard))
@@ -20,6 +21,7 @@ extension UIViewController {
     func dismissKeyboard() {
         view.endEditing(true)
     }
+    
     func progessAnimation(_ show: Bool) {
         if show {
             SVProgressHUD.show()

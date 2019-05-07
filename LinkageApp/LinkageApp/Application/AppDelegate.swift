@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,10 +16,17 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        FirebaseApp.configure()
         window = window ?? UIWindow()
         let rootVC = LoginViewController.instantiate()
-        window?.rootViewController = rootVC
-        window?.makeKeyAndVisible()
+        let nav = BaseNavigationController().then {
+            $0.isNavigationBarHidden = true
+        }
+        nav.pushViewController(rootVC, animated: false)
+        window?.do {
+            $0.rootViewController = nav
+            $0.makeKeyAndVisible()
+        }
         return true
     }
 }

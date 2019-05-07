@@ -29,4 +29,7 @@ target 'LinkageApp' do
   # TensorFlow
   pod 'TensorFlow-experimental'
   
+  #Toast
+  pod 'Toast-Swift', '~> 5.0.0'
+  
 end
