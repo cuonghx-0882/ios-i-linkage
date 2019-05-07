@@ -22,4 +22,5 @@ enum Message {
     static let enterEmailMS = "Enter your email address"
     static let successMS = "Success !"
     static let checkYEmailMS = "Please check your email address"
+    static let userNotFoundMS = "User not Found"
 }

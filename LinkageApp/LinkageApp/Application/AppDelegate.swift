@@ -16,10 +16,15 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        configApp()
+        return true
+    }
+    
+    private func configApp() {
         FirebaseApp.configure()
         window = window ?? UIWindow()
         let rootVC = LoginViewController.instantiate()
-        let nav = BaseNavigationController().then {
+        let nav = UINavigationController().then {
             $0.isNavigationBarHidden = true
         }
         nav.pushViewController(rootVC, animated: false)
@@ -27,6 +32,5 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             $0.rootViewController = nav
             $0.makeKeyAndVisible()
         }
-        return true
     }
 }

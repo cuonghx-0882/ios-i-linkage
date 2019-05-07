@@ -6,88 +6,54 @@
 //  Copyright © 2019 Sun*. All rights reserved.
 //
 
+import ObjectMapper
+
 protocol AuthenticationLocalDataSource {
     func saveUser(user: User)
-    func getuser() -> User?
+    func getUser() -> User?
     func removeUser()
 }
 
-final class AuthenticationLocalDataSourceIml: AuthenticationLocalDataSource {
+final class AuthManagerLocalDataSource: AuthenticationLocalDataSource {
     
-    private var user: User!
+    private var user: User! {
+        didSet {
+            if user == nil {
+                preferences.removeObject(forKey: key)
+            } else {
+                preferences.set(user.toJSON(), forKey: key)
+            }
+            preferences.synchronize()
+        }
+    }
+    private let key = "UserLocalKey"
+    private var preferences = UserDefaults.standard
     
     private init () {}
     
-    class var sharedInstance: AuthenticationLocalDataSource {
+    static var shared: AuthenticationLocalDataSource {
         enum Static {
-            static let instance = AuthenticationLocalDataSourceIml()
+            static let instance = AuthManagerLocalDataSource()
         }
         return Static.instance
     }
     
     func saveUser(user: User) {
         self.user = user
-        let preferences = UserDefaults.standard
-        preferences.set(user.uid, forKey: UserKey.uid.rawValue)
-        preferences.set(user.name, forKey: UserKey.name.rawValue)
-        preferences.set(user.urlImage, forKey: UserKey.urlImage.rawValue)
-        preferences.set(user.hobbies, forKey: UserKey.hobbies.rawValue)
-        preferences.set(user.description, forKey: UserKey.description.rawValue)
-        preferences.set(user.dob, forKey: UserKey.dob.rawValue)
-        preferences.set(user.gender, forKey: UserKey.gender.rawValue)
-        preferences.set(user.job, forKey: UserKey.job.rawValue)
-        preferences.synchronize()
     }
     
-    func getuser() -> User? {
+    func getUser() -> User? {
         if self.user != nil {
             return self.user
         }
-        let preferences = UserDefaults.standard
-        guard let uid = preferences.object(forKey: UserKey.uid.rawValue) as? String,
-        let name = preferences.object(forKey: UserKey.name.rawValue) as? String,
-        let urlImage = preferences.object(forKey: UserKey.urlImage.rawValue) as? String,
-        let job = preferences.object(forKey: UserKey.job.rawValue) as? String,
-        let hobbies = preferences.object(forKey: UserKey.hobbies.rawValue) as? String,
-        let description = preferences.object(forKey: UserKey.description.rawValue) as? String,
-        let dob = preferences.object(forKey: UserKey.dob.rawValue) as? String,
-        let gender = preferences.object(forKey: UserKey.gender.rawValue) as? Bool
-        else {
+        guard let json = preferences.value(forKey: key) as? [String: Any] else {
             return nil
         }
-        self.user = User(uid: uid,
-                         name: name,
-                         urlImage: urlImage,
-                         job: job,
-                         hobbies: hobbies,
-                         description: description,
-                         dob: dob,
-                         gender: gender)
+        self.user = User(JSON: json)
         return self.user
     }
     
     func removeUser() {
         self.user = nil
-        let preferences = UserDefaults.standard
-        preferences.removeObject(forKey: UserKey.uid.rawValue)
-        preferences.removeObject(forKey: UserKey.name.rawValue)
-        preferences.removeObject(forKey: UserKey.urlImage.rawValue)
-        preferences.removeObject(forKey: UserKey.hobbies.rawValue)
-        preferences.removeObject(forKey: UserKey.description.rawValue)
-        preferences.removeObject(forKey: UserKey.dob.rawValue)
-        preferences.removeObject(forKey: UserKey.gender.rawValue)
-        preferences.removeObject(forKey: UserKey.job.rawValue)
-        preferences.synchronize()
     }
-}
-
-enum UserKey: String {
-    case uid
-    case name
-    case urlImage
-    case job
-    case hobbies
-    case description
-    case dob
-    case gender
 }

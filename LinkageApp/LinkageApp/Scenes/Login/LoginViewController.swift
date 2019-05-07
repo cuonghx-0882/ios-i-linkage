@@ -11,9 +11,9 @@ import FirebaseAuth
 final class LoginViewController: BaseViewController {
     
     // MARK: - IBOutLets
-    @IBOutlet private weak var emailTF: UITextField!
-    @IBOutlet private weak var passwordTF: UITextField!
-    @IBOutlet private weak var logoImage: UIImageView!
+    @IBOutlet private weak var emailTextField: UITextField!
+    @IBOutlet private weak var passwordTextField: UITextField!
+    @IBOutlet private weak var logoImageView: UIImageView!
     
     // MARK: - Properties
     
@@ -26,10 +26,10 @@ final class LoginViewController: BaseViewController {
     // MARK: - Method
     private func configView() {
         hideKeyboardWhenTappedAround()
-        emailTF.delegate = self
-        passwordTF.delegate = self
-        //Animation Logo
-        logoImage.alpha = 0
+        animationLogo()
+    }
+    private func animationLogo() {
+        logoImageView.alpha = 0
         let lgImageTmp = UIImageView().then {
             $0.frame.size = CGSize(width: 100, height: 100)
             $0.center = view.center
@@ -38,57 +38,47 @@ final class LoginViewController: BaseViewController {
         view.addSubview(lgImageTmp)
         UIView.animate(withDuration: 0.5,
                        animations: {
-            lgImageTmp.center = CGPoint(x: self.view.center.x,
-                                        y: self.logoImage.center.y + 20)
+                        lgImageTmp.center = CGPoint(x: self.view.center.x,
+                                                    y: self.logoImageView.center.y + 20)
         }, completion: { _ in
-            self.logoImage.alpha = 1
+            self.logoImageView.alpha = 1
             lgImageTmp.removeFromSuperview()
         })
     }
     
     @IBAction private func handlerLoginButton(_ sender: UIButton) {
-        guard let email = emailTF.text,
-            let password = passwordTF.text else { return }
+        guard let email = emailTextField.text,
+            let password = passwordTextField.text else { return }
         
-        if !email.isValidateEmail() {
-            self.showAlertView(title: Message.emailNotValidMS,
-                               message: Message.enterValidEmailMS,
-                               cancelButton: "Ok")
+        if !Validation.isValidateEmail(email: email) {
+            showAlertView(title: Message.emailNotValidMS,
+                          message: Message.enterValidEmailMS,
+                          cancelButton: "Ok")
             return
         }
         progessAnimation(true)
-        Auth.auth().signIn(withEmail: email, password: password) {(result, err) in
-            self.progessAnimation(false)
-            guard let nav = self.navigationController as? BaseNavigationController else {
-                return
-            }
+        UserRepository.shared.signIn(email: email, password: password) { (user, err) in
+            self.progessAnimation(false )
             if let err = err {
                 if let errCode = AuthErrorCode(rawValue: err._code) {
                     switch errCode {
                     case AuthErrorCode.networkError :
-                        nav.showErrorAlert(message: Message.checkNetworkingMS)
+                        self.showErrorAlert(errMessage: Message.checkNetworkingMS)
                     case AuthErrorCode.wrongPassword :
-                        nav.showErrorAlert(message: Message.invalidEmailOrPasswordMS)
+                        self.showErrorAlert(errMessage: Message.invalidEmailOrPasswordMS)
+                    case AuthErrorCode.userNotFound :
+                        self.showErrorAlert(errMessage: Message.userNotFoundMS)
                     default :
-                        nav.showErrorAlert(message: err.localizedDescription)
+                        self.showErrorAlert(errMessage: err.localizedDescription)
                     }
                 }
             } else {
-                if let uid = result?.user.uid {
-                    FirebaseService.share.getUserFromUID(uid: uid, completion: { (user, err) in
-                        if let err = err {
-                            nav.showErrorAlert(message: err.localizedDescription)
-                        } else {
-                            if let user = user {
-                                print("ok")
-                                AuthenticationLocalDataSourceIml.sharedInstance.saveUser(user: user)
-                            } else {
-                                nav.showAlertView(title: Message.errorWithAccountMS,
-                                                  message: Message.contactToOurMS,
-                                                  cancelButton: "Yes")
-                            }
-                        }
-                    })
+                if let user = user {
+                    AuthManagerLocalDataSource.shared.saveUser(user: user)
+                } else {
+                    self.showAlertView(title: Message.errorWithAccountMS,
+                                       message: Message.contactToOurMS,
+                                       cancelButton: "Yes")
                 }
             }
         }
@@ -96,28 +86,22 @@ final class LoginViewController: BaseViewController {
     
     @IBAction private func handlerForgotButton(_ sender: UIButton) {
         showInputDialog(title: Message.enterEmailMS,
-                        subtitle: "",
-                        actionTitle: "OK",
-                        cancelTitle: "Cancel",
-                        inputPlaceholder: nil,
-                        inputKeyboardType: .emailAddress,
-                        cancelHandler: nil) { [unowned self] (email) in
-                            guard let email = email, email.isValidateEmail() else {
-                                self.showErrorAlert(message: Message.emailNotValidMS)
+                        actionTitle: "Send",
+                        inputKeyboardType: .emailAddress) { [unowned self] (email) in
+                            guard let email = email, Validation.isValidateEmail(email: email) else {
+                                self.showErrorAlert(errMessage: Message.emailNotValidMS)
                                 return
                             }
-                            Auth.auth().sendPasswordReset(withEmail: email, completion: { (err) in
-                                guard let nav = self.navigationController as? BaseNavigationController else {
-                                    return
-                                }
+                            UserRepository.shared.forgot(email: email, completion: { (err) in
                                 if let err = err {
-                                    nav.showErrorAlert(message: err.localizedDescription)
+                                    self.navigationController?.showErrorAlert(errMessage: err.localizedDescription)
                                     return
                                 }
-                                nav.showAlertView(title: Message.successMS,
-                                                  message: Message.checkYEmailMS,
-                                                  cancelButton: "OK")
+                                self.navigationController?.showAlertView(title: Message.successMS,
+                                                                         message: Message.checkYEmailMS,
+                                                                         cancelButton: "OK")
                             })
+                            
         }
     }
     
@@ -136,5 +120,4 @@ extension LoginViewController: UITextFieldDelegate {
 // MARK: - StoryboardSceneBased
 extension LoginViewController: StoryboardSceneBased {
     static var sceneStoryboard = Storyboards.login
-    static var sceneIdentifier = "LoginVC"
 }

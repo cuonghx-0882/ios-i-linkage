@@ -7,9 +7,8 @@
 //
 
 // swiftlint:disable final_class
-class BaseViewController: UIViewController, AlertViewController {
+class BaseViewController: UIViewController {
     deinit {
         logDeinit()
     }
 }
-// swiftlint:enable final_class

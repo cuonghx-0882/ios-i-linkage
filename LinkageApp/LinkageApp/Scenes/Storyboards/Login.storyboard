@@ -15,7 +15,7 @@
         <!--Login View Controller-->
         <scene sceneID="As0-uO-zaD">
             <objects>
-                <viewController storyboardIdentifier="LoginVC" id="CLd-JM-42t" customClass="LoginViewController" customModule="LinkageApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="CLd-JM-42t" customClass="LoginViewController" customModule="LinkageApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yTO-RO-MXw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -24,10 +24,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1D7-FN-xK7">
-                                <rect key="frame" x="138" y="20" width="100" height="248"/>
+                                <rect key="frame" x="137.5" y="20" width="100" height="248"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="fkM-wG-JEV">
-                                        <rect key="frame" x="0.0" y="74" width="100" height="100"/>
+                                        <rect key="frame" x="0.0" y="74.5" width="100" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="TLD-4n-rPP"/>
                                             <constraint firstAttribute="width" secondItem="fkM-wG-JEV" secondAttribute="height" multiplier="1:1" id="d8N-x5-JtD"/>
@@ -67,6 +67,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="username"/>
+                                <connections>
+                                    <outlet property="delegate" destination="CLd-JM-42t" id="Heq-BV-dUZ"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fil-sN-q2t">
                                 <rect key="frame" x="16" y="323.5" width="343" height="40"/>
@@ -76,9 +79,12 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                <connections>
+                                    <outlet property="delegate" destination="CLd-JM-42t" id="zXx-MB-ee7"/>
+                                </connections>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B5K-uK-Zzc">
-                                <rect key="frame" x="65" y="622" width="246" height="45"/>
+                                <rect key="frame" x="64.5" y="622" width="246" height="45"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account ?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X3X-nV-OfT">
                                         <rect key="frame" x="0.0" y="12" width="184" height="21"/>
@@ -147,9 +153,9 @@
                         <viewLayoutGuide key="safeArea" id="1pf-wf-Idv"/>
                     </view>
                     <connections>
-                        <outlet property="emailTF" destination="S4g-uc-YKx" id="V7r-gE-Huz"/>
-                        <outlet property="logoImage" destination="fkM-wG-JEV" id="Pn1-Vn-7oq"/>
-                        <outlet property="passwordTF" destination="Fil-sN-q2t" id="iok-Gl-I21"/>
+                        <outlet property="emailTextField" destination="S4g-uc-YKx" id="hN7-hF-YB0"/>
+                        <outlet property="logoImageView" destination="fkM-wG-JEV" id="9kn-7f-6Ct"/>
+                        <outlet property="passwordTextField" destination="Fil-sN-q2t" id="pJf-zW-Net"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tWe-bG-yJI" userLabel="First Responder" sceneMemberID="firstResponder"/>
