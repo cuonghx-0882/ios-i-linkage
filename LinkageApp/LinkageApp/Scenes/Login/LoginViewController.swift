@@ -39,7 +39,7 @@ final class LoginViewController: BaseViewController {
         UIView.animate(withDuration: 0.5,
                        animations: {
                         lgImageTmp.center = CGPoint(x: self.view.center.x,
-                                                    y: self.logoImageView.center.y + 20)
+                                                    y: self.logoImageView.center.y)
         }, completion: { _ in
             self.logoImageView.alpha = 1
             lgImageTmp.removeFromSuperview()
@@ -60,6 +60,7 @@ final class LoginViewController: BaseViewController {
         UserRepository.shared.signIn(email: email, password: password) { (user, err) in
             self.progessAnimation(false )
             if let err = err {
+                self.progessAnimation(false)
                 if let errCode = AuthErrorCode(rawValue: err._code) {
                     switch errCode {
                     case AuthErrorCode.networkError :
@@ -75,6 +76,8 @@ final class LoginViewController: BaseViewController {
             } else {
                 if let user = user {
                     AuthManagerLocalDataSource.shared.saveUser(user: user)
+                    let nameNotification = NSNotification.Name(NavigationController.KeyNotificationMain)
+                    NotificationCenter.default.post(name: nameNotification, object: nil)
                 } else {
                     self.showAlertView(title: Message.errorWithAccountMS,
                                        message: Message.contactToOurMS,
@@ -106,6 +109,7 @@ final class LoginViewController: BaseViewController {
     }
     
     @IBAction private func handlerSignUpButton(_ sender: UIButton) {
+        self.navigationController?.pushViewController(RegisterViewController.instantiate(), animated: true)
     }
 }
 

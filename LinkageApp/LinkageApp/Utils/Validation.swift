@@ -12,4 +12,13 @@ enum Validation {
         let emailTest = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
         return emailTest.evaluate(with: email)
     }
+    static func isValidateDate(date: String) -> Bool {
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "dd-MM-yyyy"
+        if dateFormatterGet.date(from: date) != nil {
+            return true
+        } else {
+            return false
+        }
+    }
 }

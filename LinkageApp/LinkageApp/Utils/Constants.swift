@@ -23,4 +23,12 @@ enum Message {
     static let successMS = "Success !"
     static let checkYEmailMS = "Please check your email address"
     static let userNotFoundMS = "User not Found"
+    static let passwordEmptyMS = "Password field is empty"
+    static let confirmPasswordNotMatchMS = "Your password and confirmation password do not match"
+    static let nameFieldNullMS = "Name field is empty"
+    static let dobFieldNullMS = "Date of birth field is empty"
+    static let dobFieldNotValid = "Invalid date format. Please enter the date in the format \"dd-MM-yyyy\""
+    static let slOtherImageMS = "Select other image"
+    static let slAnImageMS = "Select an image to continue"
+    static let emailFieldNullMS = "Email field is empty"
 }

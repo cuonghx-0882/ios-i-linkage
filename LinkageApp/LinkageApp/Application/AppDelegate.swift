@@ -23,11 +23,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     private func configApp() {
         FirebaseApp.configure()
         window = window ?? UIWindow()
-        let rootVC = LoginViewController.instantiate()
-        let nav = UINavigationController().then {
+        let nav = NavigationController().then {
             $0.isNavigationBarHidden = true
         }
-        nav.pushViewController(rootVC, animated: false)
         window?.do {
             $0.rootViewController = nav
             $0.makeKeyAndVisible()
