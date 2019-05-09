@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		35C2013D46C056F2F36719ED /* Pods_LinkageApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15849A5E4584ED5642AA88EE /* Pods_LinkageApp.framework */; };
+		95419B38227FD948004E174F /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95419B37227FD948004E174F /* Login.storyboard */; };
+		95419B3B227FDA09004E174F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95419B3A227FDA09004E174F /* LoginViewController.swift */; };
+		95419B3D227FDA2C004E174F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95419B3C227FDA2B004E174F /* BaseViewController.swift */; };
+		95419B41227FDA7E004E174F /* StringsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95419B40227FDA7E004E174F /* StringsExtensions.swift */; };
+		95419B43227FDB5A004E174F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95419B42227FDB59004E174F /* Constants.swift */; };
+		9561203822828AF0006C6F07 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9561203722828AF0006C6F07 /* UserRepository.swift */; };
+		9561203A2282939B006C6F07 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956120392282939B006C6F07 /* Validation.swift */; };
+		956CA54A228409E700BB2A93 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 956CA549228409E600BB2A93 /* GoogleService-Info.plist */; };
+		95A560AA228123AF00331BC9 /* AuthenticationLocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A560A9228123AF00331BC9 /* AuthenticationLocalDataSource.swift */; };
+		95A560B122814AF100331BC9 /* KeyFirebaseDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A560B022814AF100331BC9 /* KeyFirebaseDatabase.swift */; };
 		95ABA0AB227D95E600774D13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95ABA09E227D95E500774D13 /* Assets.xcassets */; };
 		95ABA0AC227D95E600774D13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95ABA0A1227D95E500774D13 /* LaunchScreen.storyboard */; };
 		95ABA0AD227D95E600774D13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95ABA0A3227D95E500774D13 /* Main.storyboard */; };
@@ -17,12 +27,24 @@
 		95ABA0B7227D991B00774D13 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ABA0B6227D991B00774D13 /* UIViewController+.swift */; };
 		95ABA0BA227D99F400774D13 /* Storyboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ABA0B9227D99F400774D13 /* Storyboards.swift */; };
 		95ABA0C3227D9E6B00774D13 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ABA0C2227D9E6B00774D13 /* Screen.swift */; };
+		95CE45152280405100A7B086 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CE45142280405100A7B086 /* FirebaseService.swift */; };
+		95CE45172280453700A7B086 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CE45162280453700A7B086 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		15849A5E4584ED5642AA88EE /* Pods_LinkageApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LinkageApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B8A8E29EFE422BF81658640 /* Pods-LinkageApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LinkageApp.debug.xcconfig"; path = "Target Support Files/Pods-LinkageApp/Pods-LinkageApp.debug.xcconfig"; sourceTree = "<group>"; };
 		759E6E119F13EEF19077A6DA /* Pods-LinkageApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LinkageApp.release.xcconfig"; path = "Target Support Files/Pods-LinkageApp/Pods-LinkageApp.release.xcconfig"; sourceTree = "<group>"; };
+		95419B37227FD948004E174F /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		95419B3A227FDA09004E174F /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		95419B3C227FDA2B004E174F /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		95419B40227FDA7E004E174F /* StringsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringsExtensions.swift; sourceTree = "<group>"; };
+		95419B42227FDB59004E174F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		9561203722828AF0006C6F07 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		956120392282939B006C6F07 /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
+		956CA549228409E600BB2A93 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		95A560A9228123AF00331BC9 /* AuthenticationLocalDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationLocalDataSource.swift; sourceTree = "<group>"; };
+		95A560B022814AF100331BC9 /* KeyFirebaseDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyFirebaseDatabase.swift; sourceTree = "<group>"; };
 		95ABA07B227D943600774D13 /* LinkageApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LinkageApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95ABA09E227D95E500774D13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		95ABA0A2227D95E500774D13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -33,6 +55,8 @@
 		95ABA0B6227D991B00774D13 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		95ABA0B9227D99F400774D13 /* Storyboards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboards.swift; sourceTree = "<group>"; };
 		95ABA0C2227D9E6B00774D13 /* Screen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
+		95CE45142280405100A7B086 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
+		95CE45162280453700A7B086 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		95D0761E227EDD4600F0D220 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95D07626227EDE0E00F0D220 /* LinkageApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LinkageApp-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -66,6 +90,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		95419B39227FD9F8004E174F /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				95419B3A227FDA09004E174F /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		95ABA072227D943600774D13 = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +129,7 @@
 				95ABA0C1227D9E6B00774D13 /* Support */,
 				95D07626227EDE0E00F0D220 /* LinkageApp-Bridging-Header.h */,
 				95D0761E227EDD4600F0D220 /* Info.plist */,
+				956CA549228409E600BB2A93 /* GoogleService-Info.plist */,
 			);
 			path = LinkageApp;
 			sourceTree = "<group>";
@@ -113,6 +146,7 @@
 		95ABA091227D95E400774D13 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				95CE45162280453700A7B086 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -129,6 +163,7 @@
 		95ABA093227D95E400774D13 /* Local */ = {
 			isa = PBXGroup;
 			children = (
+				95A560A9228123AF00331BC9 /* AuthenticationLocalDataSource.swift */,
 			);
 			path = Local;
 			sourceTree = "<group>";
@@ -137,7 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				95ABA095227D95E400774D13 /* API */,
-				95ABA09A227D95E400774D13 /* Service */,
+				95ABA09A227D95E400774D13 /* FirebaseDatabase */,
 			);
 			path = Remote;
 			sourceTree = "<group>";
@@ -181,11 +216,13 @@
 			path = Response;
 			sourceTree = "<group>";
 		};
-		95ABA09A227D95E400774D13 /* Service */ = {
+		95ABA09A227D95E400774D13 /* FirebaseDatabase */ = {
 			isa = PBXGroup;
 			children = (
+				95CE45142280405100A7B086 /* FirebaseService.swift */,
+				95A560B022814AF100331BC9 /* KeyFirebaseDatabase.swift */,
 			);
-			path = Service;
+			path = FirebaseDatabase;
 			sourceTree = "<group>";
 		};
 		95ABA09D227D95E500774D13 /* Resources */ = {
@@ -199,7 +236,9 @@
 		95ABA0A0227D95E500774D13 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				95419B39227FD9F8004E174F /* Login */,
 				95ABA0B8227D993800774D13 /* Storyboards */,
+				95419B3C227FDA2B004E174F /* BaseViewController.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -207,6 +246,8 @@
 		95ABA0A5227D95E500774D13 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				95419B42227FDB59004E174F /* Constants.swift */,
+				956120392282939B006C6F07 /* Validation.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -225,6 +266,7 @@
 				95ABA0B2227D98E700774D13 /* UIView+.swift */,
 				95ABA0B4227D990000774D13 /* UIViewController+Debug.swift */,
 				95ABA0B6227D991B00774D13 /* UIViewController+.swift */,
+				95419B40227FDA7E004E174F /* StringsExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -232,6 +274,7 @@
 		95ABA0B1227D96F400774D13 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				9561203722828AF0006C6F07 /* UserRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -239,6 +282,7 @@
 		95ABA0B8227D993800774D13 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				95419B37227FD948004E174F /* Login.storyboard */,
 				95ABA0A1227D95E500774D13 /* LaunchScreen.storyboard */,
 				95ABA0A3227D95E500774D13 /* Main.storyboard */,
 				95ABA0B9227D99F400774D13 /* Storyboards.swift */,
@@ -316,9 +360,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95419B38227FD948004E174F /* Login.storyboard in Resources */,
 				95ABA0AD227D95E600774D13 /* Main.storyboard in Resources */,
 				95ABA0AC227D95E600774D13 /* LaunchScreen.storyboard in Resources */,
 				95ABA0AB227D95E600774D13 /* Assets.xcassets in Resources */,
+				956CA54A228409E700BB2A93 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,10 +445,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95419B3B227FDA09004E174F /* LoginViewController.swift in Sources */,
+				95419B43227FDB5A004E174F /* Constants.swift in Sources */,
 				95ABA0C3227D9E6B00774D13 /* Screen.swift in Sources */,
 				95ABA0BA227D99F400774D13 /* Storyboards.swift in Sources */,
+				9561203A2282939B006C6F07 /* Validation.swift in Sources */,
 				95ABA0B3227D98E700774D13 /* UIView+.swift in Sources */,
+				95419B41227FDA7E004E174F /* StringsExtensions.swift in Sources */,
+				9561203822828AF0006C6F07 /* UserRepository.swift in Sources */,
+				95CE45172280453700A7B086 /* User.swift in Sources */,
 				95ABA0AE227D95E600774D13 /* AppDelegate.swift in Sources */,
+				95CE45152280405100A7B086 /* FirebaseService.swift in Sources */,
+				95419B3D227FDA2C004E174F /* BaseViewController.swift in Sources */,
+				95A560B122814AF100331BC9 /* KeyFirebaseDatabase.swift in Sources */,
+				95A560AA228123AF00331BC9 /* AuthenticationLocalDataSource.swift in Sources */,
 				95ABA0B7227D991B00774D13 /* UIViewController+.swift in Sources */,
 				95ABA0B5227D990000774D13 /* UIViewController+Debug.swift in Sources */,
 			);
@@ -552,7 +608,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 96F2ZQ3PBH;
-				INFOPLIST_FILE = "/Users/cuonghx/Documents/Training ios /ios-i-linkage/LinkageApp/LinkageApp/Info.plist";
+				INFOPLIST_FILE = LinkageApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -574,7 +630,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 96F2ZQ3PBH;
-				INFOPLIST_FILE = "/Users/cuonghx/Documents/Training ios /ios-i-linkage/LinkageApp/LinkageApp/Info.plist";
+				INFOPLIST_FILE = LinkageApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
