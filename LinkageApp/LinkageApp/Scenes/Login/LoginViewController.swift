@@ -28,6 +28,7 @@ final class LoginViewController: BaseViewController {
         hideKeyboardWhenTappedAround()
         animationLogo()
     }
+    
     private func animationLogo() {
         logoImageView.alpha = 0
         let lgImageTmp = UIImageView().then {
@@ -57,31 +58,30 @@ final class LoginViewController: BaseViewController {
             return
         }
         progessAnimation(true)
-        UserRepository.shared.signIn(email: email, password: password) { (user, err) in
-            self.progessAnimation(false )
+        UserRepository.shared.signIn(email: email, password: password) { [weak self] (user, err) in
+            self?.progessAnimation(false )
             if let err = err {
-                self.progessAnimation(false)
                 if let errCode = AuthErrorCode(rawValue: err._code) {
                     switch errCode {
                     case AuthErrorCode.networkError :
-                        self.showErrorAlert(errMessage: Message.checkNetworkingMS)
+                        self?.showErrorAlert(errMessage: Message.checkNetworkingMS)
                     case AuthErrorCode.wrongPassword :
-                        self.showErrorAlert(errMessage: Message.invalidEmailOrPasswordMS)
+                        self?.showErrorAlert(errMessage: Message.invalidEmailOrPasswordMS)
                     case AuthErrorCode.userNotFound :
-                        self.showErrorAlert(errMessage: Message.userNotFoundMS)
+                        self?.showErrorAlert(errMessage: Message.userNotFoundMS)
                     default :
-                        self.showErrorAlert(errMessage: err.localizedDescription)
+                        self?.showErrorAlert(errMessage: err.localizedDescription)
                     }
                 }
             } else {
-                if let user = user {
+                if let user = user,
+                    let nav = self?.navigationController as? NavigationController {
                     AuthManagerLocalDataSource.shared.saveUser(user: user)
-                    let nameNotification = NSNotification.Name(NavigationController.KeyNotificationMain)
-                    NotificationCenter.default.post(name: nameNotification, object: nil)
+                    nav.handlerGotoMainScreen()
                 } else {
-                    self.showAlertView(title: Message.errorWithAccountMS,
-                                       message: Message.contactToOurMS,
-                                       cancelButton: "Yes")
+                    self?.showAlertView(title: Message.errorWithAccountMS,
+                                        message: Message.contactToOurMS,
+                                        cancelButton: "Yes")
                 }
             }
         }
@@ -95,21 +95,21 @@ final class LoginViewController: BaseViewController {
                                 self.showErrorAlert(errMessage: Message.emailNotValidMS)
                                 return
                             }
-                            UserRepository.shared.forgot(email: email, completion: { (err) in
+                            UserRepository.shared.forgot(email: email, completion: { [weak self] (err) in
                                 if let err = err {
-                                    self.navigationController?.showErrorAlert(errMessage: err.localizedDescription)
+                                    self?.navigationController?.showErrorAlert(errMessage: err.localizedDescription)
                                     return
                                 }
-                                self.navigationController?.showAlertView(title: Message.successMS,
-                                                                         message: Message.checkYEmailMS,
-                                                                         cancelButton: "OK")
+                                self?.navigationController?.showAlertView(title: Message.successMS,
+                                                                          message: Message.checkYEmailMS,
+                                                                          cancelButton: "OK")
                             })
                             
         }
     }
     
     @IBAction private func handlerSignUpButton(_ sender: UIButton) {
-        self.navigationController?.pushViewController(RegisterViewController.instantiate(), animated: true)
+        navigationController?.pushViewController(RegisterViewController.instantiate(), animated: true)
     }
 }
 

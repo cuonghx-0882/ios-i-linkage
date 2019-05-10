@@ -11,10 +11,10 @@ import ImagePicker
 final class RegisterUploadImageViewController: BaseViewController {
 
     // MARK: - IBOutlets
-    @IBOutlet weak var avatarImageView: UIImageView!
-    @IBOutlet weak var jobTextField: UITextField!
-    @IBOutlet weak var hobbiesTextField: UITextField!
-    @IBOutlet weak var descriptionTextField: UITextField!
+    @IBOutlet private weak var avatarImageView: UIImageView!
+    @IBOutlet private weak var jobTextField: UITextField!
+    @IBOutlet private weak var hobbiesTextField: UITextField!
+    @IBOutlet private weak var descriptionTextField: UITextField!
     
     // MARK: - Properties
     
@@ -50,14 +50,15 @@ final class RegisterUploadImageViewController: BaseViewController {
             user.job = jobTextField.text ?? ""
             user.hobbies = hobbiesTextField.text ?? ""
             progessAnimation(true)
-            FirebaseService.share.saveUser(user: user) { (err) in
-                self.progessAnimation(false)
+            FirebaseService.share.saveUser(user: user) {[weak self] (err) in
+                self?.progessAnimation(false)
                 if let err = err {
-                    self.showErrorAlert(errMessage: err.localizedDescription)
+                    self?.showErrorAlert(errMessage: err.localizedDescription)
                 } else {
                     AuthManagerLocalDataSource.shared.saveUser(user: user)
-                    let notificationName = Notification.Name(NavigationController.KeyNotificationMain)
-                    NotificationCenter.default.post(name: notificationName, object: nil)
+                    if let nav = self?.navigationController as? NavigationController {
+                        nav.handlerGotoMainScreen()
+                    }
                 }
             }
         } else {
@@ -69,12 +70,12 @@ final class RegisterUploadImageViewController: BaseViewController {
         if let url = url,
             var user = AuthManagerLocalDataSource.shared.getUser() {
             user.urlImage = url.absoluteString
-            FirebaseService.share.saveUser(user: user, completion: { (err) in
-                self.progessAnimation(false)
+            FirebaseService.share.saveUser(user: user, completion: {[weak self] (err) in
+                self?.progessAnimation(false)
                 if let err = err {
-                    self.showAlertView(title: Message.slOtherImageMS ,
-                                       message: err.localizedDescription,
-                                       cancelButton: "OK")
+                    self?.showAlertView(title: Message.slOtherImageMS ,
+                                        message: err.localizedDescription,
+                                        cancelButton: "OK")
                 } else {
                     AuthManagerLocalDataSource.shared.saveUser(user: user)
                 }

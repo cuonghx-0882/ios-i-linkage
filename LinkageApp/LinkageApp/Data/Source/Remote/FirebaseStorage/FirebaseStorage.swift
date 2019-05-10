@@ -27,7 +27,7 @@ struct FirebaseStoreageService {
                 }
             }
         } else {
-            
+            completion(nil, nil)
         }
     }
 }

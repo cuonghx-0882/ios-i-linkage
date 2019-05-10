@@ -37,11 +37,11 @@ final class RegisterViewController: BaseViewController {
             let dob = dobTextField.text else {
             return
         }
-        if !checkValidate(email: email,
-                          password: password,
-                          confirmPassword: confirmPassword,
-                          name: name,
-                          dob: dob) {
+        if !Validation.checkValidateSignIn(email: email,
+                                           password: password,
+                                           confirmPassword: confirmPassword,
+                                           name: name,
+                                           dob: dob) {
             return
         }
         let gender = self.genderSegment.selectedSegmentIndex == 1 ? true : false
@@ -50,55 +50,18 @@ final class RegisterViewController: BaseViewController {
                                      password: password,
                                      name: name,
                                      dob: dob,
-                                     gender: gender) { (user, err) in
-                                        self.progessAnimation(false)
+                                     gender: gender) {[weak self] (user, err) in
+                                        self?.progessAnimation(false)
                                         if let err = err {
-                                            self.showErrorAlert(errMessage: err.localizedDescription)
-                                        } else if let user = user {
+                                            self?.showErrorAlert(errMessage: err.localizedDescription)
+                                        } else if let user = user,
+                                            let nav = self?.navigationController as? NavigationController {
                                             AuthManagerLocalDataSource.shared.saveUser(user: user)
-                                            let nName = Notification.Name(NavigationController.KeyNotificationMain)
-                                            NotificationCenter.default.post(name: nName, object: nil)
+                                            nav.handlerGotoMainScreen()
                                         } else {
-                                            self.showErrorAlert(errMessage: Message.contactToOurMS)
+                                            self?.showErrorAlert(errMessage: Message.contactToOurMS)
                                         }
         }
-    }
-        
-    private func checkValidate(email: String,
-                               password: String,
-                               confirmPassword: String,
-                               name: String,
-                               dob: String) -> Bool {
-        if email.isEmpty {
-            showErrorAlert(errMessage: Message.emailFieldNullMS)
-            return false
-        }
-        if !Validation.isValidateEmail(email: email) {
-            showErrorAlert(errMessage: Message.emailNotValidMS)
-            return false
-        }
-        if password.isEmpty {
-            showErrorAlert(errMessage: Message.passwordEmptyMS)
-            return false
-        }
-        if confirmPassword != password {
-            showErrorAlert(errMessage: Message.confirmPasswordNotMatchMS)
-            return false
-        }
-        if name.isEmpty {
-            showErrorAlert(errMessage: Message.nameFieldNullMS)
-            return false
-        }
-        if dob.isEmpty {
-            showErrorAlert(errMessage: Message.dobFieldNullMS)
-            return false
-        }
-        if !Validation.isValidateDate(date: dob) {
-            showErrorAlert(errMessage: Message.dobFieldNotValid)
-            return false
-        }
-        
-        return true
     }
     
     @IBAction func handlerSignInButton(_ sender: UIButton) {

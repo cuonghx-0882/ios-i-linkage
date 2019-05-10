@@ -10,7 +10,12 @@ import FirebaseAuth
 
 protocol UserRepositoryType {
     func signIn(email: String, password: String, completion callback: @escaping (User?, Error?) -> Void)
-    func signUp(email: String, password: String, name: String, dob: String, gender: Bool, completion: @escaping (User?, Error?) -> Void)
+    func signUp(email: String,
+                password: String,
+                name: String,
+                dob: String,
+                gender: Bool,
+                completion: @escaping (User?, Error?) -> Void)
     func logout()
     func forgot(email: String, completion: @escaping (Error?) -> Void)
 }
