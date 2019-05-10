@@ -29,4 +29,7 @@ target 'LinkageApp' do
   # TensorFlow
   pod 'TensorFlow-experimental'
   
+  #ImagePicker
+  pod 'ImagePicker'
+  
 end

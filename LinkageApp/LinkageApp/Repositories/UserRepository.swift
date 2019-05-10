@@ -10,7 +10,12 @@ import FirebaseAuth
 
 protocol UserRepositoryType {
     func signIn(email: String, password: String, completion callback: @escaping (User?, Error?) -> Void)
-    func signUp()
+    func signUp(email: String,
+                password: String,
+                name: String,
+                dob: String,
+                gender: Bool,
+                completion: @escaping (User?, Error?) -> Void)
     func logout()
     func forgot(email: String, completion: @escaping (Error?) -> Void)
 }
@@ -31,12 +36,39 @@ final class UserRepository: UserRepositoryType {
                     callback(user, err)
                 })
             } else {
-               callback(nil, err)
+                callback(nil, err)
             }
         }
     }
     
-    func signUp() { }
+    func signUp(email: String,
+                password: String,
+                name: String,
+                dob: String,
+                gender: Bool,
+                completion: @escaping (User?, Error?) -> Void) {
+        Auth.auth().createUser(withEmail: email, password: password) { (auth, err) in
+            if let authUser = auth?.user {
+                let user = User(uid: authUser.uid,
+                                name: name,
+                                urlImage: "",
+                                job: "",
+                                hobbies: "",
+                                description: "",
+                                dob: dob,
+                                gender: gender)
+                FirebaseService.share.saveUser(user: user, completion: { (err) in
+                    if let err = err {
+                        completion(nil, err)
+                    } else {
+                        completion(user, nil)
+                    }
+                })
+            } else {
+                completion(nil, err)
+            }
+        }
+    }
     
     func logout() { }
     
