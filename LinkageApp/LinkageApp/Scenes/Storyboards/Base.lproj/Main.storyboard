@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,19 +10,128 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Request-->
+        <scene sceneID="v3s-Dv-DRN">
             <objects>
-                <viewController id="BYZ-38-t0r" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <viewController id="t9G-Tv-gCC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LbG-UT-JF5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="dHR-XD-P8d"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Request" image="request" selectedImage="request" id="pN8-nB-Icu"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oBM-BB-x4q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-33" y="596"/>
+        </scene>
+        <!--Chat-->
+        <scene sceneID="nfs-P4-OWu">
+            <objects>
+                <viewController id="Ieo-hc-AwN" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xj9-Ks-Q0b">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="hr3-vu-7Ne"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Chat" image="chatic" id="BQy-C2-GxI"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d3v-4m-1MM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="68" y="-312"/>
+        </scene>
+        <!--Near-->
+        <scene sceneID="h7b-Vj-X0A">
+            <objects>
+                <viewController id="lGY-aK-PiS" customClass="SearchByDistanceViewController" customModule="LinkageApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="wny-5J-zPd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3SI-Kw-tlo">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="3SI-Kw-tlo" firstAttribute="bottom" secondItem="wny-5J-zPd" secondAttribute="bottom" id="bBC-F5-YTY"/>
+                            <constraint firstItem="3SI-Kw-tlo" firstAttribute="leading" secondItem="1c2-kd-BSj" secondAttribute="leading" id="nnb-EV-Ien"/>
+                            <constraint firstAttribute="top" secondItem="3SI-Kw-tlo" secondAttribute="top" id="r85-k1-Jcm"/>
+                            <constraint firstItem="1c2-kd-BSj" firstAttribute="trailing" secondItem="3SI-Kw-tlo" secondAttribute="trailing" id="w51-mJ-LIW"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="1c2-kd-BSj"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Near" image="global" id="rC5-ch-Lud"/>
+                    <connections>
+                        <outlet property="tableView" destination="3SI-Kw-tlo" id="gvS-I3-JgX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="goN-jE-tnu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-972" y="595.95202398800609"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="cmq-bb-LHt">
+            <objects>
+                <viewController id="Znx-CQ-vkU" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="exh-xQ-gSv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="nqm-UX-0qR"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Profile" image="profile" id="fAO-Uu-U4E"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pNP-oy-MyZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="68" y="-1004"/>
+        </scene>
+        <!--Facenet-->
+        <scene sceneID="jRw-sf-O4Z">
+            <objects>
+                <viewController id="9K2-ea-xFG" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gOy-qN-Fja">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="EY9-Yd-i0w"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Facenet" image="camera" id="eh3-Jp-U4W"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P6U-Om-CUD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1751" y="596"/>
+        </scene>
+        <!--Main Tab Bar View Controller-->
+        <scene sceneID="2hv-MH-ziE">
+            <objects>
+                <tabBarController storyboardIdentifier="MainTabBarViewController" id="ime-yv-CKw" customClass="MainTabBarViewController" customModule="LinkageApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bUx-CQ-oqS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Ieo-hc-AwN" kind="relationship" relationship="viewControllers" id="92N-rp-j86"/>
+                        <segue destination="t9G-Tv-gCC" kind="relationship" relationship="viewControllers" id="6au-Zq-0aK"/>
+                        <segue destination="lGY-aK-PiS" kind="relationship" relationship="viewControllers" id="otJ-Y3-z8e"/>
+                        <segue destination="9K2-ea-xFG" kind="relationship" relationship="viewControllers" id="ZM7-3G-h8z"/>
+                        <segue destination="Znx-CQ-vkU" kind="relationship" relationship="viewControllers" id="bdD-XP-GGw"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="skK-Y3-pnK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-972" y="-311"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="camera" width="32" height="32"/>
+        <image name="chatic" width="32" height="32"/>
+        <image name="global" width="32" height="32"/>
+        <image name="profile" width="32" height="32"/>
+        <image name="request" width="32" height="32"/>
+    </resources>
 </document>

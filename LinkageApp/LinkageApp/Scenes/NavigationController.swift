@@ -36,7 +36,7 @@ final class NavigationController: UINavigationController {
         if user.urlImage.isEmpty {
             pushViewController(RegisterUploadImageViewController.instantiate(), animated: false)
         } else {
-            viewControllers = []
+            viewControllers = [MainTabBarViewController.instantiate()]
         }
     }
 }

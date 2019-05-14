@@ -2,8 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Require access Location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Require access</string>
+	<string>Require access Location</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Requires access to the library</string>
 	<key>NSCameraUsageDescription</key>

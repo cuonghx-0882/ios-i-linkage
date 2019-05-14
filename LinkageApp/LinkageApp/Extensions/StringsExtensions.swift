@@ -9,4 +9,15 @@
 import Foundation
 
 extension String {
+    func getAgeFromDateString() -> Int? {
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "dd-MM-yyyy"
+        let calender = Calendar.current
+        if let date = dateFormatterGet.date(from: self) {
+            return calender.dateComponents([.year],
+                                           from: date ,
+                                           to: Date()).year
+        }
+        return nil
+    }
 }

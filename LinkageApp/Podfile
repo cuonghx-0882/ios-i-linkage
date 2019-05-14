@@ -32,4 +32,10 @@ target 'LinkageApp' do
   #ImagePicker
   pod 'ImagePicker'
   
+  #Kingfisher
+  pod 'Kingfisher', '<= 4.9.0'
+  
+  #Popup
+  pod 'KUIPopOver'
+  
 end
