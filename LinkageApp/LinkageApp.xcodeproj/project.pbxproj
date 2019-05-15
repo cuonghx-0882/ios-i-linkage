@@ -34,6 +34,16 @@
 		95ABA0C3227D9E6B00774D13 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ABA0C2227D9E6B00774D13 /* Screen.swift */; };
 		95CE45152280405100A7B086 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CE45142280405100A7B086 /* FirebaseService.swift */; };
 		95CE45172280453700A7B086 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CE45162280453700A7B086 /* User.swift */; };
+		95E3EC7B228B01A9003A4A27 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3EC7A228B01A8003A4A27 /* Location.swift */; };
+		95E3EC7D228B01AF003A4A27 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3EC7C228B01AF003A4A27 /* Filter.swift */; };
+		95E3EC7F228B020B003A4A27 /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3EC7E228B020B003A4A27 /* Double+.swift */; };
+		95E3EC8A228B032A003A4A27 /* FilterPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3EC86228B032A003A4A27 /* FilterPopup.swift */; };
+		95E3EC8B228B032A003A4A27 /* FilterPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95E3EC87228B032A003A4A27 /* FilterPopup.xib */; };
+		95E3EC99228B0355003A4A27 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3EC8F228B0355003A4A27 /* MainTabBarViewController.swift */; };
+		95E3EC9A228B0355003A4A27 /* ModelCellResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3EC94228B0355003A4A27 /* ModelCellResult.swift */; };
+		95E3EC9B228B0355003A4A27 /* ResultSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3EC95228B0355003A4A27 /* ResultSearchTableViewCell.swift */; };
+		95E3EC9C228B0355003A4A27 /* ResultSearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95E3EC96228B0355003A4A27 /* ResultSearchTableViewCell.xib */; };
+		95E3EC9D228B0355003A4A27 /* SearchByDistanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3EC97228B0355003A4A27 /* SearchByDistanceViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +79,16 @@
 		95CE45162280453700A7B086 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		95D0761E227EDD4600F0D220 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95D07626227EDE0E00F0D220 /* LinkageApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LinkageApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		95E3EC7A228B01A8003A4A27 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		95E3EC7C228B01AF003A4A27 /* Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		95E3EC7E228B020B003A4A27 /* Double+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
+		95E3EC86228B032A003A4A27 /* FilterPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterPopup.swift; sourceTree = "<group>"; };
+		95E3EC87228B032A003A4A27 /* FilterPopup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterPopup.xib; sourceTree = "<group>"; };
+		95E3EC8F228B0355003A4A27 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
+		95E3EC94228B0355003A4A27 /* ModelCellResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelCellResult.swift; sourceTree = "<group>"; };
+		95E3EC95228B0355003A4A27 /* ResultSearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultSearchTableViewCell.swift; sourceTree = "<group>"; };
+		95E3EC96228B0355003A4A27 /* ResultSearchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultSearchTableViewCell.xib; sourceTree = "<group>"; };
+		95E3EC97228B0355003A4A27 /* SearchByDistanceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchByDistanceViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +194,8 @@
 			isa = PBXGroup;
 			children = (
 				95CE45162280453700A7B086 /* User.swift */,
+				95E3EC7A228B01A8003A4A27 /* Location.swift */,
+				95E3EC7C228B01AF003A4A27 /* Filter.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -264,6 +286,9 @@
 		95ABA0A0227D95E500774D13 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				95E3EC8D228B0355003A4A27 /* Main */,
+				95E3EC8F228B0355003A4A27 /* MainTabBarViewController.swift */,
+				95E3EC85228B032A003A4A27 /* Popup */,
 				959F165F22848B7100A68B89 /* Register */,
 				95419B39227FD9F8004E174F /* Login */,
 				95ABA0B8227D993800774D13 /* Storyboards */,
@@ -298,6 +323,7 @@
 				95ABA0B6227D991B00774D13 /* UIViewController+.swift */,
 				95419B40227FDA7E004E174F /* StringsExtensions.swift */,
 				9520B04A2285440D003F4D2B /* UIApplication+.swift */,
+				95E3EC7E228B020B003A4A27 /* Double+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -327,6 +353,74 @@
 				95ABA0C2227D9E6B00774D13 /* Screen.swift */,
 			);
 			path = Support;
+			sourceTree = "<group>";
+		};
+		95E3EC85228B032A003A4A27 /* Popup */ = {
+			isa = PBXGroup;
+			children = (
+				95E3EC86228B032A003A4A27 /* FilterPopup.swift */,
+				95E3EC87228B032A003A4A27 /* FilterPopup.xib */,
+			);
+			path = Popup;
+			sourceTree = "<group>";
+		};
+		95E3EC8D228B0355003A4A27 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				95E3EC8E228B0355003A4A27 /* Chat */,
+				95E3EC90228B0355003A4A27 /* Profile */,
+				95E3EC91228B0355003A4A27 /* Request */,
+				95E3EC92228B0355003A4A27 /* SearchByDistance */,
+				95E3EC98228B0355003A4A27 /* SearchByFacenet */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		95E3EC8E228B0355003A4A27 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		95E3EC90228B0355003A4A27 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		95E3EC91228B0355003A4A27 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		95E3EC92228B0355003A4A27 /* SearchByDistance */ = {
+			isa = PBXGroup;
+			children = (
+				95E3EC93228B0355003A4A27 /* Cell */,
+				95E3EC97228B0355003A4A27 /* SearchByDistanceViewController.swift */,
+			);
+			path = SearchByDistance;
+			sourceTree = "<group>";
+		};
+		95E3EC93228B0355003A4A27 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				95E3EC94228B0355003A4A27 /* ModelCellResult.swift */,
+				95E3EC95228B0355003A4A27 /* ResultSearchTableViewCell.swift */,
+				95E3EC96228B0355003A4A27 /* ResultSearchTableViewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		95E3EC98228B0355003A4A27 /* SearchByFacenet */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SearchByFacenet;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -395,6 +489,8 @@
 				95ABA0AD227D95E600774D13 /* Main.storyboard in Resources */,
 				95ABA0AC227D95E600774D13 /* LaunchScreen.storyboard in Resources */,
 				95ABA0AB227D95E600774D13 /* Assets.xcassets in Resources */,
+				95E3EC9C228B0355003A4A27 /* ResultSearchTableViewCell.xib in Resources */,
+				95E3EC8B228B032A003A4A27 /* FilterPopup.xib in Resources */,
 				956CA54A228409E700BB2A93 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -478,11 +574,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95E3EC8A228B032A003A4A27 /* FilterPopup.swift in Sources */,
 				95419B3B227FDA09004E174F /* LoginViewController.swift in Sources */,
 				95419B43227FDB5A004E174F /* Constants.swift in Sources */,
+				95E3EC7D228B01AF003A4A27 /* Filter.swift in Sources */,
 				95ABA0C3227D9E6B00774D13 /* Screen.swift in Sources */,
+				95E3EC9D228B0355003A4A27 /* SearchByDistanceViewController.swift in Sources */,
 				95ABA0BA227D99F400774D13 /* Storyboards.swift in Sources */,
 				959F166222848B8000A68B89 /* RegisterViewController.swift in Sources */,
+				95E3EC99228B0355003A4A27 /* MainTabBarViewController.swift in Sources */,
 				9561203A2282939B006C6F07 /* Validation.swift in Sources */,
 				95ABA0B3227D98E700774D13 /* UIView+.swift in Sources */,
 				95419B41227FDA7E004E174F /* StringsExtensions.swift in Sources */,
@@ -490,6 +590,8 @@
 				9520B04B2285440D003F4D2B /* UIApplication+.swift in Sources */,
 				95CE45172280453700A7B086 /* User.swift in Sources */,
 				95ABA0AE227D95E600774D13 /* AppDelegate.swift in Sources */,
+				95E3EC9A228B0355003A4A27 /* ModelCellResult.swift in Sources */,
+				95E3EC7B228B01A9003A4A27 /* Location.swift in Sources */,
 				95CE45152280405100A7B086 /* FirebaseService.swift in Sources */,
 				95419B3D227FDA2C004E174F /* BaseViewController.swift in Sources */,
 				95A560B122814AF100331BC9 /* KeyFirebaseDatabase.swift in Sources */,
@@ -498,6 +600,8 @@
 				959F165C228489D900A68B89 /* FirebaseStorage.swift in Sources */,
 				95ABA0B7227D991B00774D13 /* UIViewController+.swift in Sources */,
 				959F166322848B8000A68B89 /* RegisterUploadImageViewController.swift in Sources */,
+				95E3EC7F228B020B003A4A27 /* Double+.swift in Sources */,
+				95E3EC9B228B0355003A4A27 /* ResultSearchTableViewCell.swift in Sources */,
 				95ABA0B5227D990000774D13 /* UIViewController+Debug.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

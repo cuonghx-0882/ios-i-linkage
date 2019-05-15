@@ -31,4 +31,18 @@ enum Message {
     static let slOtherImageMS = "Select other image"
     static let slAnImageMS = "Select an image to continue"
     static let emailFieldNullMS = "Email field is empty"
+    static let gpsAccessTitle = "GPS access is restricted"
+    static let gpsAccessMS = "Please enable GPS in the Settigs app under Privacy, Location Services"
+    static let gpsAccessDeniedTitle = "GPS access is denied"
+    static let gpsAccessDeniedMS = "Please select Always or While Using the App"
+    static let filterNotValidate = "Filter not validate"
+    static let filterNotValidateMS = "Your age field or distance field not validate"
+}
+
+enum ButtonTitle {
+    static let gpsGotoSettingLC = "Go to Settings now"
+}
+
+enum TitleScreen {
+    static let searchByDistanceScreen = "Seach by Distance"
 }

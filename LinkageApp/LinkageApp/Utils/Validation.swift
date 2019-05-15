@@ -16,7 +16,37 @@ enum Validation {
     static func isValidateDate(date: String) -> Bool {
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "dd-MM-yyyy"
-        return dateFormatterGet.date(from: date) != nil 
+        return dateFormatterGet.date(from: date) != nil
+    }
+    
+    static func checkValidateFilter(filter: Filter) -> Bool {
+        let ageFrom = Int(filter.ageFrom) ?? 0
+        let distanceFrom = Int(filter.distanceFrom) ?? 0
+        let ageTo = Int(filter.ageTo) ?? Int.max
+        let distanceTo = Int(filter.distanceTo) ?? Int.max
+        return ageFrom <= ageTo && distanceFrom <= distanceTo
+    }
+    
+    static func modelValidateWithFilter(model: ModelCellResult, filter: Filter) -> Bool {
+        switch filter.gender {
+        case 1:
+            if !model.user.gender { return false }
+        case 2:
+            if model.user.gender { return false }
+        default:
+            break
+        }
+        let fromDistance = filter.distanceFrom.isEmpty ? "" : filter.distanceFrom.appending("000")
+        let toDistance = filter.distanceTo.isEmpty ? "" : filter.distanceTo.appending("000")
+        if !Validation.checkValidateNumberInRange(number: model.user.dob.getAgeFromDateString(),
+                                                  min: filter.ageFrom,
+                                                  max: filter.ageTo) ||
+            !Validation.checkValidateNumberInRange(number: Int(model.location.distance),
+                                                   min: fromDistance,
+                                                   max: toDistance) {
+            return false
+        }
+        return true
     }
     
     static func checkValidateSignIn(email: String,
@@ -53,6 +83,44 @@ enum Validation {
                 vc.showErrorAlert(errMessage: Message.dobFieldNotValid)
                 return false
             }
+        }
+        return true
+    }
+    
+    static func checkInRange(number: Int, min: Int, max: Int) -> Bool {
+        return number <= max && number >= min
+    }
+    
+    static func lessThanOrEqual(number: Int, with: Int) -> Bool {
+        return number <= with
+    }
+    
+    static func moreThanOrEqual(number: Int, with: Int) -> Bool {
+        return number >= with
+    }
+    
+    static func checkValidateNumberInRange(number: Int?, min: String, max: String) -> Bool {
+        if let number = number {
+            if min.isEmpty,
+                let numberTo = Int(max),
+                !Validation.lessThanOrEqual(number: number,
+                                            with: numberTo) {
+                return false
+            } else if max.isEmpty,
+                let numberFrom = Int(min),
+                !Validation.moreThanOrEqual(number: number,
+                                            with: numberFrom) {
+                return false
+            } else if let numberFrom = Int(min),
+                let numberTo = Int(max),
+                !Validation.checkInRange(number: number,
+                                         min: numberFrom,
+                                         max: numberTo) {
+                return false
+            }
+
+        } else if !min.isEmpty || !max.isEmpty {
+            return false
         }
         return true
     }
