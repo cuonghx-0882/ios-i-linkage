@@ -28,7 +28,6 @@ enum Validation {
     }
     
     static func modelValidateWithFilter(model: ModelCellResult, filter: Filter) -> Bool {
-        let filter = filter
         switch filter.gender {
         case 1:
             if !model.user.gender { return false }
@@ -102,13 +101,7 @@ enum Validation {
     
     static func checkValidateNumberInRange(number: Int?, min: String, max: String) -> Bool {
         if let number = number {
-            if let numberFrom = Int(min),
-                let numberTo = Int(max),
-                !Validation.checkInRange(number: number,
-                                         min: numberFrom,
-                                         max: numberTo) {
-                return false
-            } else if min.isEmpty,
+            if min.isEmpty,
                 let numberTo = Int(max),
                 !Validation.lessThanOrEqual(number: number,
                                             with: numberTo) {
@@ -118,7 +111,14 @@ enum Validation {
                 !Validation.moreThanOrEqual(number: number,
                                             with: numberFrom) {
                 return false
+            } else if let numberFrom = Int(min),
+                let numberTo = Int(max),
+                !Validation.checkInRange(number: number,
+                                         min: numberFrom,
+                                         max: numberTo) {
+                return false
             }
+
         } else if !min.isEmpty || !max.isEmpty {
             return false
         }

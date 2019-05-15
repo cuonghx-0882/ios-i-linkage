@@ -40,15 +40,14 @@ final class FilterPopup: UIView, NibOwnerLoadable, KUIPopOverUsable {
     @IBAction private func handlerCancelButton(_ sender: UIButton) {
         dismissPopover(animated: true)
     }
-    
-    func setupPopUp(filter: Filter?) {
-        if let filter = filter {
-            genderSegmentControl.selectedSegmentIndex = filter.gender
-            distanceFromTextField.text = filter.distanceFrom
-            distanceToTextField.text = filter.distanceTo
-            ageFromTextField.text = filter.ageFrom
-            ageToTextField.text = filter.ageTo
-        }
+
+    func clearFilter() {
+        genderSegmentControl.selectedSegmentIndex = 0
+        distanceFromTextField.text = ""
+        distanceToTextField.text = ""
+        ageFromTextField.text = ""
+        ageToTextField.text = ""
+        
     }
     
     @IBAction private func handlerFilterButton(_ sender: UIButton) {
@@ -66,6 +65,7 @@ final class FilterPopup: UIView, NibOwnerLoadable, KUIPopOverUsable {
     }
     
     @IBAction private func clearFilter(_ sender: UIButton) {
+        clearFilter()
         delegate?.handlerClearButton(filterPopup: self)
     }
 }

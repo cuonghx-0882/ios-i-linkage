@@ -17,11 +17,6 @@ final class ResultSearchTableViewCell: UITableViewCell, NibReusable {
     @IBOutlet private weak var ageLabel: UILabel!
     @IBOutlet private weak var distanceLabel: UILabel!
     
-    // MARK: - Life Cycle
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
     // MARK: - Method
     func setContent(model: ModelCellResult) {
         distanceLabel.text = String(format: "Distance: %.1fkm", model.location.distance.tokm)

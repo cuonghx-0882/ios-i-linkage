@@ -13,6 +13,7 @@ final class SearchByDistanceViewController: UIViewController {
 
     // MARK: IBOutlets
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var emptyDataView: UIView!
     
     // MARK: Properties
     private lazy var locationManager: CLLocationManager = {
@@ -24,8 +25,16 @@ final class SearchByDistanceViewController: UIViewController {
     }()
     private var data = [ModelCellResult]()
     private var currentLocation: Location!
-    private var currentFilter: Filter?
     private var filteredData = [ModelCellResult]()
+    private lazy var filterPopup: FilterPopup = {
+        let popup = FilterPopup(frame: CGRect(x: 0,
+                                              y: 0,
+                                              width: 290,
+                                              height: 199)).then {
+                                                $0.delegate = self
+        }
+        return popup
+    }()
     
     // MARK: Life Cycle
     override func viewDidLoad() {
@@ -67,20 +76,12 @@ final class SearchByDistanceViewController: UIViewController {
     func reloadData() {
         tableView.refreshControl?.endRefreshing()
         loadData()
-        currentFilter = nil
     }
     
     @objc
     private func handerFilter(sender: UIBarButtonItem) {
-        _ = FilterPopup(frame: CGRect(x: 0,
-                                      y: 0,
-                                      width: 290,
-                                      height: 199)).then {
-                                        $0.delegate = self
-                                        $0.showPopover(barButtonItem: sender,
-                                                       shouldDismissOnTap: false)
-                                        $0.setupPopUp(filter: currentFilter)
-        }
+        filterPopup.showPopover(barButtonItem: sender,
+                                shouldDismissOnTap: false)
     }
     
     private func configLocation() {
@@ -133,24 +134,18 @@ extension SearchByDistanceViewController: UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        var numOfSections: Int = 0
         if !filteredData.isEmpty {
-            tableView.separatorStyle = .singleLine
-            numOfSections = 1
-            tableView.backgroundView = nil
-        } else {
-            let noDataLabel = UILabel(frame: CGRect(x: 0,
-                                                    y: 0,
-                                                    width: tableView.bounds.size.width,
-                                                    height: tableView.bounds.size.height)).then {
-                                                        $0.text = "No data available"
-                                                        $0.textColor = UIColor.black
-                                                        $0.textAlignment = .center
+            tableView.do {
+                $0.separatorStyle = .singleLine
+                $0.backgroundView = nil
             }
-            tableView.backgroundView = noDataLabel
-            tableView.separatorStyle = .none
+            return 1
         }
-        return numOfSections
+        tableView.do {
+            $0.backgroundView = emptyDataView
+            $0.separatorStyle = .none
+        }
+        return 0
     }
 }
 
@@ -205,7 +200,6 @@ extension SearchByDistanceViewController: FilterPopupDelegate {
     func handlerClearButton(filterPopup: FilterPopup) {
         filterPopup.dismissPopover(animated: true)
         filteredData = data
-        currentFilter = nil
         tableView.reloadData()
     }
     
@@ -217,7 +211,6 @@ extension SearchByDistanceViewController: FilterPopupDelegate {
                           cancelButton: "cancel")
             return
         }
-        currentFilter = filter
         var filtered = [ModelCellResult]()
         for item in data {
             if Validation.modelValidateWithFilter(model: item,

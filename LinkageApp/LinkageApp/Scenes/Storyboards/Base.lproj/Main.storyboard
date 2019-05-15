@@ -66,10 +66,29 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Near" image="global" id="rC5-ch-Lud"/>
                     <connections>
+                        <outlet property="emptyDataView" destination="6If-au-VWD" id="lRc-T9-UmY"/>
                         <outlet property="tableView" destination="3SI-Kw-tlo" id="gvS-I3-JgX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="goN-jE-tnu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="6If-au-VWD">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No data available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ExM-Ei-WK9">
+                            <rect key="frame" x="54.5" y="54" width="131" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="ExM-Ei-WK9" firstAttribute="centerY" secondItem="Knz-g2-xsU" secondAttribute="centerY" id="48V-qJ-Yl6"/>
+                        <constraint firstItem="ExM-Ei-WK9" firstAttribute="centerX" secondItem="Knz-g2-xsU" secondAttribute="centerX" id="nYU-To-Nns"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="Knz-g2-xsU"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="-972" y="595.95202398800609"/>
         </scene>
