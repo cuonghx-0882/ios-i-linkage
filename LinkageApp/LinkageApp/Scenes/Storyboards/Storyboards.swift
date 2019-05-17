@@ -9,4 +9,5 @@
 enum Storyboards {
     static let main = UIStoryboard(name: "Main", bundle: nil)
     static let login = UIStoryboard(name: "Login", bundle: nil)
+    static let detail = UIStoryboard(name: "Detail", bundle: nil)
 }

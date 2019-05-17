@@ -70,11 +70,15 @@ final class SearchByDistanceViewController: UIViewController {
             $0.refreshControl = UIRefreshControl()
             $0.refreshControl?.addTarget(self, action: #selector(reloadData), for: .valueChanged)
         }
+        tabBarController?.delegate = self
     }
     
     @objc
     func reloadData() {
         tableView.refreshControl?.endRefreshing()
+        UIView.animate(withDuration: 0.5, animations: {
+            self.tableView.contentOffset = CGPoint.zero
+        })
         loadData()
     }
     
@@ -99,9 +103,10 @@ final class SearchByDistanceViewController: UIViewController {
     }
     
     private func loadData() {
-        navigationController?.progessAnimation(true)
-        FirebaseService.share
-            .getAllLocation(currentLocation: currentLocation) { [weak self] (locations, err) in
+        if Connectivity.isConnectedToInternet {
+            navigationController?.progessAnimation(true)
+            let share = FirebaseService.share
+            share.getAllLocation(currentLocation: currentLocation) { [weak self] (locations, err) in
                 self?.navigationController?.progessAnimation(false)
                 let dataSorted = locations.sorted(by: { $0.location.distance < $1.location.distance })
                 self?.data = dataSorted
@@ -112,6 +117,9 @@ final class SearchByDistanceViewController: UIViewController {
                     self?.tableView.reloadData()
                 }
             }
+        } else {
+            showErrorAlert(errMessage: Message.checkNetworkingMS)
+        }
     }
 }
 
@@ -153,6 +161,10 @@ extension SearchByDistanceViewController: UITableViewDataSource {
 extension SearchByDistanceViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let detailScreen = DetailScreenViewController.instantiate().then {
+            $0.modelCell = filteredData[indexPath.row]
+        }
+        navigationController?.pushViewController(detailScreen, animated: true)
     }
 }
 
@@ -220,5 +232,25 @@ extension SearchByDistanceViewController: FilterPopupDelegate {
         }
         filteredData = filtered
         tableView.reloadData()
+    }
+}
+
+// MARK: - TabBarControllerDelegate
+extension SearchByDistanceViewController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        guard tabBarController.selectedViewController == viewController,
+            viewController == self else {
+            return tabBarController.selectedViewController != viewController
+        }
+        if let navbar = navigationController?.navigationBar,
+            -tableView.contentOffset.y != navbar.frame.height + navbar.frame.origin.y {
+            tableView.scrollToRow(at: IndexPath(row: 0,
+                                                section: 0),
+                                  at: .top,
+                                  animated: true)
+        } else {
+            loadData()
+        }
+        return tabBarController.selectedViewController != viewController
     }
 }

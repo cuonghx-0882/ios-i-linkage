@@ -37,10 +37,21 @@ enum Message {
     static let gpsAccessDeniedMS = "Please select Always or While Using the App"
     static let filterNotValidate = "Filter not validate"
     static let filterNotValidateMS = "Your age field or distance field not validate"
+    static let sendGreetingMS = "Enter the greeting message"
+    static let sendGRMSTitle = "Send a greeting message"
+    static let messageEmpty = "This message cannot be empty"
+}
+
+enum Title {
+    static let descriptionTT = "Description: "
+    static let jobTT = "Job: "
+    static let hobbiesTT = "Hobbies: "
 }
 
 enum ButtonTitle {
     static let gpsGotoSettingLC = "Go to Settings now"
+    static let back = "Back"
+    static let send = "Send"
 }
 
 enum TitleScreen {

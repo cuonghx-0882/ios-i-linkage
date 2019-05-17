@@ -17,6 +17,10 @@ struct FirebaseService {
     
     private init () { }
     
+}
+
+// MARK: - User
+extension FirebaseService {
     // MARK: - Method
     func getUserFromUID(uid: String, completion : @escaping (User?, Error?) -> Void ) {
         let userKey = KeyFirebaseDatabase.usersDatabase
@@ -30,9 +34,9 @@ struct FirebaseService {
                                         completion(nil, nil)
                                         
                                     }
-        }, withCancel: { (err) in
-            completion(nil, err)
-        })
+            }, withCancel: { (err) in
+                completion(nil, err)
+            })
     }
     
     func saveUser(user: User, completion : @escaping (Error?) -> Void) {
@@ -46,7 +50,10 @@ struct FirebaseService {
             completion(err)
         }
     }
-    
+}
+
+// MARK: - Location
+extension FirebaseService {
     func pushLocation(uid: String, location: Location, completion: @escaping (Error?) -> Void) {
         let locationKey = KeyFirebaseDatabase.locationDatabase
         ref.child(locationKey).child(uid).setValue(location.toJSON()) { (err, _ ) in
@@ -89,5 +96,68 @@ struct FirebaseService {
             }, withCancel: { (err) in
                 completion([], err)
             })
+    }
+}
+
+// MARK: - Message Method
+extension FirebaseService {
+    func sendMessageRequest(content: String,
+                            fromID: String,
+                            toID: String,
+                            completion: @escaping (Error?) -> Void) {
+        ref.child(KeyFirebaseDatabase.message)
+            .observeSingleEvent(of: .value) { (snap) in
+                var alreadyExist: MessageModel?
+                for item in snap.children {
+                    if let snapshot = item as? DataSnapshot,
+                        let value = snapshot.value as? [String: Any],
+                        var message = MessageModel(JSON: value),
+                        message.user.index(of: fromID) != nil,
+                        message.user.index(of: toID) != nil {
+                        message.id = snapshot.key
+                        alreadyExist = message
+                        break
+                    }
+                }
+                if let message = alreadyExist,
+                    message.user.first == fromID {
+                    completion(ErrorCustom.alreadyRequest)
+                } else if alreadyExist != nil {
+                    completion(ErrorCustom.alreadyRequesInList)
+                } else {
+                    let messageModel = MessageModel(fromUID: fromID,
+                                                    toUID: toID)
+                    self.ref.child(KeyFirebaseDatabase.message)
+                        .childByAutoId()
+                        .setValue(messageModel.toJSON(), withCompletionBlock: { (err, dbref) in
+                            if let key = dbref.key {
+                                self.sendMessage(content: content,
+                                                 messeageID: key,
+                                                 fromID: fromID,
+                                                 completion: completion)
+                            } else {
+                                completion(err)
+                            }
+                        })
+                }
+            }
+    }
+    
+    func sendMessage(content: String,
+                     messeageID: String,
+                     fromID: String,
+                     completion: @escaping (Error?) -> Void ) {
+        var message = MessageItemModel(content: content,
+                                       date: 0,
+                                       fromID: fromID,
+                                       isActive: true).toJSON()
+        message["date"] = ServerValue.timestamp()
+        ref.child(KeyFirebaseDatabase.message)
+            .child(messeageID)
+            .child(KeyFirebaseDatabase.message)
+            .childByAutoId()
+            .setValue(message) { (err, _ ) in
+                completion(err)
+            }
     }
 }

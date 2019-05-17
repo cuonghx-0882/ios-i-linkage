@@ -9,4 +9,5 @@
 enum KeyFirebaseDatabase {
     static let usersDatabase = "users"
     static let locationDatabase = "locations"
+    static let message = "messages"
 }
