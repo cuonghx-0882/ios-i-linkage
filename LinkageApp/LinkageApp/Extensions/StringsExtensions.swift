@@ -20,4 +20,12 @@ extension String {
         }
         return nil
     }
+    
+    var byWords: [SubSequence] {
+        var byWords: [SubSequence] = []
+        enumerateSubstrings(in: startIndex..., options: .byWords) { _, range, _, _ in
+            byWords.append(self[range])
+        }
+        return byWords
+    }
 }
