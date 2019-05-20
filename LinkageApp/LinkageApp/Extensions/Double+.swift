@@ -14,4 +14,10 @@ extension Double {
     var tom: Double {
         return self * 1000.0
     }
+    var convertToTimeIntervalFirebase: Double {
+        return self * 1000
+    }
+    var convertTimeIntervalFromFirebase: Double {
+        return self / 1000
+    }
 }

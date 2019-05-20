@@ -40,20 +40,24 @@ enum Message {
     static let sendGreetingMS = "Enter the greeting message"
     static let sendGRMSTitle = "Send a greeting message"
     static let messageEmpty = "This message cannot be empty"
+    static let mesageRequest = " sent you a message, Do you want to connect with them"
 }
 
 enum Title {
     static let descriptionTT = "Description: "
     static let jobTT = "Job: "
     static let hobbiesTT = "Hobbies: "
+    static let justNow = "Just now"
 }
 
 enum ButtonTitle {
     static let gpsGotoSettingLC = "Go to Settings now"
     static let back = "Back"
     static let send = "Send"
+    static let goProfile = "Go to Profile"
 }
 
 enum TitleScreen {
     static let searchByDistanceScreen = "Seach by Distance"
+    static let requestScren = "Request"
 }
