@@ -6,7 +6,7 @@
 //  Copyright © 2019 cuonghx. All rights reserved.
 //
 
-import Foundation
+import MessengerKit
 
 extension String {
     func getAgeFromDateString() -> Int? {
@@ -27,5 +27,16 @@ extension String {
             byWords.append(self[range])
         }
         return byWords
+    }
+    
+    var containsOnlyEmoji: Bool {
+        return !isEmpty && !unicodeScalars.contains(where: {
+            !$0.isEmoji && !$0.isZeroWidthJoiner
+        })
+    }
+    
+    var convertMSBody: MSGMessageBody {
+        return (self.containsOnlyEmoji && self.count < 5) ? .emoji(self)
+            : .text(self)
     }
 }

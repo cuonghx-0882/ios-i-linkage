@@ -41,4 +41,7 @@ target 'LinkageApp' do
   #Toaster
   pod 'Toaster', '<= 2.1.1'
   
+  #Chat
+  pod 'MessengerKit', :git => 'https://github.com/steve228uk/MessengerKit.git', :commit => ‘c46be0e’
+  
 end
