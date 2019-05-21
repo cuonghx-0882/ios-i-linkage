@@ -63,18 +63,52 @@
         <!--Chat-->
         <scene sceneID="nfs-P4-OWu">
             <objects>
-                <viewController id="Ieo-hc-AwN" sceneMemberID="viewController">
+                <viewController id="Ieo-hc-AwN" customClass="ChatListViewController" customModule="LinkageApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xj9-Ks-Q0b">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FiU-Nw-Njw">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="FiU-Nw-Njw" firstAttribute="leading" secondItem="hr3-vu-7Ne" secondAttribute="leading" id="LEP-jQ-hX2"/>
+                            <constraint firstItem="FiU-Nw-Njw" firstAttribute="top" secondItem="xj9-Ks-Q0b" secondAttribute="top" id="Q2G-I4-ETS"/>
+                            <constraint firstItem="FiU-Nw-Njw" firstAttribute="trailing" secondItem="hr3-vu-7Ne" secondAttribute="trailing" id="boM-A7-fGs"/>
+                            <constraint firstAttribute="bottom" secondItem="FiU-Nw-Njw" secondAttribute="bottom" id="scs-8Q-Axs"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="hr3-vu-7Ne"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Chat" image="chatic" id="BQy-C2-GxI"/>
+                    <connections>
+                        <outlet property="emptyView" destination="BDX-8N-HNL" id="NRc-of-Ifq"/>
+                        <outlet property="tableView" destination="FiU-Nw-Njw" id="zDC-9a-LJD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d3v-4m-1MM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="BDX-8N-HNL">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No data available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hA7-41-Ryo">
+                            <rect key="frame" x="55" y="54" width="131" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="hA7-41-Ryo" firstAttribute="centerX" secondItem="hAB-1w-opC" secondAttribute="centerX" id="jiY-ff-7JY"/>
+                        <constraint firstItem="hA7-41-Ryo" firstAttribute="centerY" secondItem="hAB-1w-opC" secondAttribute="centerY" id="y7u-F4-gg6"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="hAB-1w-opC"/>
+                </view>
             </objects>
-            <point key="canvasLocation" x="68" y="-312"/>
+            <point key="canvasLocation" x="68" y="-312.59370314842579"/>
         </scene>
         <!--Near-->
         <scene sceneID="h7b-Vj-X0A">
