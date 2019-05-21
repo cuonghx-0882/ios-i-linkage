@@ -160,4 +160,101 @@ extension FirebaseService {
                 completion(err)
             }
     }
+    
+    func getMessagePaging(messageID: String,
+                          fromDate: Double,
+                          numberLimited: UInt,
+                          completion: @escaping ([MessageItemModel], Error?) -> Void) {
+        ref.child(KeyFirebaseDatabase.message)
+            .child(messageID)
+            .child(KeyFirebaseDatabase.message)
+            .queryOrdered(byChild: "date")
+            .queryLimited(toLast: numberLimited)
+            .queryEnding(atValue: fromDate)
+            .observeSingleEvent(of: .value,
+                                with: { (snapshot) in
+                                    var messages = [MessageItemModel]()
+                                    for snap in snapshot.children {
+                                        if let snap = snap as? DataSnapshot,
+                                            let value = snap.value as? [String: Any],
+                                            let mess = MessageItemModel(JSON: value) {
+                                            messages.append(mess)
+                                        }
+                                    }
+                                    completion(messages, nil)
+            }, withCancel: { (err) in
+                completion([], err)
+            })
+    }
+}
+
+// MARK: - Request Method
+extension FirebaseService {
+    
+    func connectMessage(messageID: String, completion: @escaping(Error?) -> Void) {
+        ref.child(KeyFirebaseDatabase.message)
+            .child(messageID)
+            .child("isConnected")
+            .setValue(true) { (err, _) in
+                completion(err)
+            }
+    }
+    
+    func getListMessage(uid: String,
+                        connected: Bool,
+                        completion: @escaping([MessageItemListModel], Error?) -> Void) {
+        ref.child(KeyFirebaseDatabase.message)
+            .queryOrdered(byChild: "isConnected")
+            .queryEqual(toValue: connected)
+            .observeSingleEvent(of: .value,
+                                with: { (snapshot) in
+                                    var result = [MessageItemListModel]()
+                                    let dispathGroup = DispatchGroup()
+                                    for snap in snapshot.children {
+                                        if let snap = snap as? DataSnapshot,
+                                            let value = snap.value as? [String: Any],
+                                            var mes = MessageModel(JSON: value),
+                                            (mes.user.last == uid && !connected) ||
+                                                (mes.user.index(of: uid) != nil && connected),
+                                            let fromUser = mes.user.first {
+                                            mes.id = snap.key
+                                            let date = Date().timeIntervalSince1970
+                                                .convertToTimeIntervalFirebase
+                                            dispathGroup.enter()
+                                            let dispathGroupChild = DispatchGroup()
+                                            dispathGroupChild.enter()
+                                            var user: User?
+                                            var message: MessageItemModel?
+                                            self.getMessagePaging(messageID: snap.key,
+                                                                  fromDate: date,
+                                                                  numberLimited: 1,
+                                                                  completion: { (mes, _) in
+                                                                    message = mes.first
+                                                                    dispathGroupChild.leave()
+                                            })
+                                            dispathGroupChild.enter()
+                                            self.getUserFromUID(uid: fromUser ,
+                                                                completion: { (u, _) in
+                                                                    user = u
+                                                                    dispathGroupChild.leave()
+                                            })
+                                            dispathGroupChild.notify(queue: .main, execute: {
+                                                if let user = user,
+                                                    let message = message {
+                                                    let item = MessageItemListModel(user: user,
+                                                                                    messagelast: message,
+                                                                                    messageModel: mes)
+                                                    result.append(item)
+                                                }
+                                                dispathGroup.leave()
+                                            })
+                                        }
+                                    }
+                                    dispathGroup.notify(queue: .main, execute: {
+                                        completion(result, nil)
+                                    })
+            }, withCancel: { (err) in
+                completion([], err)
+            })
+    }
 }

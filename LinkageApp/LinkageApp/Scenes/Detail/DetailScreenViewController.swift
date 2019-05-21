@@ -22,7 +22,7 @@ final class DetailScreenViewController: UIViewController {
     @IBOutlet private weak var detailView: UIView!
     
     // MARK: - Properties
-    var modelCell: ModelCellResult?
+    var model: User?
     private var startPosition: CGPoint!
     
     // MARK: - Life Cycle
@@ -34,22 +34,22 @@ final class DetailScreenViewController: UIViewController {
     // MARK: - Method
     private func configView() {
         navigationController?.navigationBar.topItem?.title = ButtonTitle.back
-        if let model = modelCell {
-            title = model.user.name
-            jobLabel.text = model.user.job.isEmpty ? ""
-                : Title.jobTT + "\(model.user.job)"
-            descriptionLabel.text = model.user.description.isEmpty ? ""
-                : Title.descriptionTT + "\(model.user.description)"
-            hobbiesLabel.text = model.user.hobbies.isEmpty ? ""
-                : Title.hobbiesTT + "\(model.user.hobbies)"
-            genderImageView.image = model.user.gender ? UIImage(named: "male") :
+        if let model = model {
+            title = model.name
+            jobLabel.text = model.job.isEmpty ? ""
+                : Title.jobTT + "\(model.job)"
+            descriptionLabel.text = model.description.isEmpty ? ""
+                : Title.descriptionTT + "\(model.description)"
+            hobbiesLabel.text = model.hobbies.isEmpty ? ""
+                : Title.hobbiesTT + "\(model.hobbies)"
+            genderImageView.image = model.gender ? UIImage(named: "male") :
                 UIImage(named: "female")
-            let url = URL(string: model.user.urlImage)
+            let url = URL(string: model.urlImage)
             avatarImageView.kf.setImage(with: url)
-            if let age = model.user.dob.getAgeFromDateString() {
-                displayNameLabel.text = String(describing: model.user.name.byWords.last ?? "" ) + ", \(age)"
+            if let age = model.dob.getAgeFromDateString() {
+                displayNameLabel.text = String(describing: model.name.byWords.last ?? "" ) + ", \(age)"
             } else {
-                displayNameLabel.text = String(describing: model.user.name.byWords.last ?? "")
+                displayNameLabel.text = String(describing: model.name.byWords.last ?? "")
             }
             
         }
@@ -95,7 +95,7 @@ final class DetailScreenViewController: UIViewController {
                             guard let title = title,
                                 let strongSelf = self,
                                 let auth = AuthManagerLocalDataSource.shared.getUser(),
-                                let model = strongSelf.modelCell else {
+                                let model = strongSelf.model else {
                                 return
                             }
                             if title.isEmpty {
@@ -104,7 +104,7 @@ final class DetailScreenViewController: UIViewController {
                                 FirebaseService.share
                                     .sendMessageRequest(content: title,
                                                         fromID: auth.uid,
-                                                        toID: model.user.uid,
+                                                        toID: model.uid,
                                                         completion: { err in
                                                             if let err = err {
                                                                 Toast(text: err.localizedDescription)

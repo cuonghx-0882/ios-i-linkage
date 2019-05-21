@@ -41,6 +41,11 @@
 		95CDD388228DCE5E00D00051 /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CDD387228DCE5E00D00051 /* Connectivity.swift */; };
 		95CE45152280405100A7B086 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CE45142280405100A7B086 /* FirebaseService.swift */; };
 		95CE45172280453700A7B086 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CE45162280453700A7B086 /* User.swift */; };
+		95DBB0132292B95F00AA6309 /* MessageItemListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBB0102292B95F00AA6309 /* MessageItemListModel.swift */; };
+		95DBB0142292B95F00AA6309 /* MessageItemListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBB0112292B95F00AA6309 /* MessageItemListCell.swift */; };
+		95DBB0152292B95F00AA6309 /* MessageItemListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95DBB0122292B95F00AA6309 /* MessageItemListCell.xib */; };
+		95DBB0172292B96A00AA6309 /* RequestScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBB0162292B96900AA6309 /* RequestScreenViewController.swift */; };
+		95DBB01A2292BCF300AA6309 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBB0192292BCF300AA6309 /* Date+.swift */; };
 		95E3EC7B228B01A9003A4A27 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3EC7A228B01A8003A4A27 /* Location.swift */; };
 		95E3EC7D228B01AF003A4A27 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3EC7C228B01AF003A4A27 /* Filter.swift */; };
 		95E3EC7F228B020B003A4A27 /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E3EC7E228B020B003A4A27 /* Double+.swift */; };
@@ -93,6 +98,11 @@
 		95CE45162280453700A7B086 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		95D0761E227EDD4600F0D220 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95D07626227EDE0E00F0D220 /* LinkageApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LinkageApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		95DBB0102292B95F00AA6309 /* MessageItemListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageItemListModel.swift; sourceTree = "<group>"; };
+		95DBB0112292B95F00AA6309 /* MessageItemListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageItemListCell.swift; sourceTree = "<group>"; };
+		95DBB0122292B95F00AA6309 /* MessageItemListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageItemListCell.xib; sourceTree = "<group>"; };
+		95DBB0162292B96900AA6309 /* RequestScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestScreenViewController.swift; sourceTree = "<group>"; };
+		95DBB0192292BCF300AA6309 /* Date+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		95E3EC7A228B01A8003A4A27 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		95E3EC7C228B01AF003A4A27 /* Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		95E3EC7E228B020B003A4A27 /* Double+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
@@ -350,6 +360,7 @@
 				9520B04A2285440D003F4D2B /* UIApplication+.swift */,
 				95E3EC7E228B020B003A4A27 /* Double+.swift */,
 				95CDD385228DCDFA00D00051 /* UILabel+.swift */,
+				95DBB0192292BCF300AA6309 /* Date+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -391,6 +402,24 @@
 			path = Detail;
 			sourceTree = "<group>";
 		};
+		95DBB00F2292B95F00AA6309 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				95DBB0102292B95F00AA6309 /* MessageItemListModel.swift */,
+				95DBB0112292B95F00AA6309 /* MessageItemListCell.swift */,
+				95DBB0122292B95F00AA6309 /* MessageItemListCell.xib */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
+		95DBB0182292BA3100AA6309 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				95DBB0162292B96900AA6309 /* RequestScreenViewController.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
 		95E3EC85228B032A003A4A27 /* Popup */ = {
 			isa = PBXGroup;
 			children = (
@@ -403,10 +432,9 @@
 		95E3EC8D228B0355003A4A27 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				95DBB0182292BA3100AA6309 /* Request */,
 				95E3EC8F228B0355003A4A27 /* MainTabBarViewController.swift */,
 				95E3EC8E228B0355003A4A27 /* Chat */,
-				95E3EC90228B0355003A4A27 /* Profile */,
-				95E3EC91228B0355003A4A27 /* Request */,
 				95E3EC92228B0355003A4A27 /* SearchByDistance */,
 				95E3EC98228B0355003A4A27 /* SearchByFacenet */,
 			);
@@ -416,22 +444,9 @@
 		95E3EC8E228B0355003A4A27 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				95DBB00F2292B95F00AA6309 /* cell */,
 			);
 			path = Chat;
-			sourceTree = "<group>";
-		};
-		95E3EC90228B0355003A4A27 /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Profile;
-			sourceTree = "<group>";
-		};
-		95E3EC91228B0355003A4A27 /* Request */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Request;
 			sourceTree = "<group>";
 		};
 		95E3EC92228B0355003A4A27 /* SearchByDistance */ = {
@@ -526,6 +541,7 @@
 				95ABA0AD227D95E600774D13 /* Main.storyboard in Resources */,
 				95ABA0AC227D95E600774D13 /* LaunchScreen.storyboard in Resources */,
 				95CDD384228DCDB000D00051 /* Detail.storyboard in Resources */,
+				95DBB0152292B95F00AA6309 /* MessageItemListCell.xib in Resources */,
 				95ABA0AB227D95E600774D13 /* Assets.xcassets in Resources */,
 				95E3EC9C228B0355003A4A27 /* ResultSearchTableViewCell.xib in Resources */,
 				95E3EC8B228B032A003A4A27 /* FilterPopup.xib in Resources */,
@@ -618,6 +634,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95DBB01A2292BCF300AA6309 /* Date+.swift in Sources */,
 				95CDD382228DCD7600D00051 /* DetailScreenViewController.swift in Sources */,
 				95E3EC8A228B032A003A4A27 /* FilterPopup.swift in Sources */,
 				95419B3B227FDA09004E174F /* LoginViewController.swift in Sources */,
@@ -626,6 +643,7 @@
 				95E3EC7D228B01AF003A4A27 /* Filter.swift in Sources */,
 				95ABA0C3227D9E6B00774D13 /* Screen.swift in Sources */,
 				9587309B228E599D00E5A486 /* MessageItemModel.swift in Sources */,
+				95DBB0142292B95F00AA6309 /* MessageItemListCell.swift in Sources */,
 				95E3EC9D228B0355003A4A27 /* SearchByDistanceViewController.swift in Sources */,
 				95CDD386228DCDFB00D00051 /* UILabel+.swift in Sources */,
 				95ABA0BA227D99F400774D13 /* Storyboards.swift in Sources */,
@@ -641,11 +659,13 @@
 				95ABA0AE227D95E600774D13 /* AppDelegate.swift in Sources */,
 				95E3EC9A228B0355003A4A27 /* ModelCellResult.swift in Sources */,
 				95E3EC7B228B01A9003A4A27 /* Location.swift in Sources */,
+				95DBB0132292B95F00AA6309 /* MessageItemListModel.swift in Sources */,
 				95CE45152280405100A7B086 /* FirebaseService.swift in Sources */,
 				95419B3D227FDA2C004E174F /* BaseViewController.swift in Sources */,
 				95A560B122814AF100331BC9 /* KeyFirebaseDatabase.swift in Sources */,
 				959F165E22848B4F00A68B89 /* NavigationController.swift in Sources */,
 				95A560AA228123AF00331BC9 /* AuthenticationLocalDataSource.swift in Sources */,
+				95DBB0172292B96A00AA6309 /* RequestScreenViewController.swift in Sources */,
 				9587309D228E5B7C00E5A486 /* MessageModel.swift in Sources */,
 				959F165C228489D900A68B89 /* FirebaseStorage.swift in Sources */,
 				95ABA0B7227D991B00774D13 /* UIViewController+.swift in Sources */,

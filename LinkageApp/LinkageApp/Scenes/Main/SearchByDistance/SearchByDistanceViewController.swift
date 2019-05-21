@@ -51,13 +51,13 @@ final class SearchByDistanceViewController: UIViewController {
                                                   target: self,
                                                   action: #selector(handerFilter(sender:)))
         tabBarController?.title = TitleScreen.searchByDistanceScreen
+        tabBarController?.delegate = self
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         navigationController?.navigationBar.topItem?
             .rightBarButtonItem = nil
-        tabBarController?.title = ""
     }
     
     // MARK: Method
@@ -70,7 +70,6 @@ final class SearchByDistanceViewController: UIViewController {
             $0.refreshControl = UIRefreshControl()
             $0.refreshControl?.addTarget(self, action: #selector(reloadData), for: .valueChanged)
         }
-        tabBarController?.delegate = self
     }
     
     @objc
@@ -108,12 +107,13 @@ final class SearchByDistanceViewController: UIViewController {
             let share = FirebaseService.share
             share.getAllLocation(currentLocation: currentLocation) { [weak self] (locations, err) in
                 self?.navigationController?.progessAnimation(false)
-                let dataSorted = locations.sorted(by: { $0.location.distance < $1.location.distance })
-                self?.data = dataSorted
-                self?.filteredData = dataSorted
                 if let err = err {
                     self?.showErrorAlert(errMessage: err.localizedDescription)
-                } else {
+                } else if !locations.isEmpty {
+                    var dataSorted = locations.sorted(by: { $0.location.distance < $1.location.distance })
+                    dataSorted.removeFirst()
+                    self?.data = dataSorted
+                    self?.filteredData = dataSorted
                     self?.tableView.reloadData()
                 }
             }
@@ -144,14 +144,12 @@ extension SearchByDistanceViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         if !filteredData.isEmpty {
             tableView.do {
-                $0.separatorStyle = .singleLine
                 $0.backgroundView = nil
             }
             return 1
         }
         tableView.do {
             $0.backgroundView = emptyDataView
-            $0.separatorStyle = .none
         }
         return 0
     }
@@ -162,7 +160,7 @@ extension SearchByDistanceViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let detailScreen = DetailScreenViewController.instantiate().then {
-            $0.modelCell = filteredData[indexPath.row]
+            $0.model = filteredData[indexPath.row].user
         }
         navigationController?.pushViewController(detailScreen, animated: true)
     }
