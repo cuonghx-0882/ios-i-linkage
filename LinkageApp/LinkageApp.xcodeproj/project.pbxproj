@@ -18,6 +18,9 @@
 		9561203A2282939B006C6F07 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956120392282939B006C6F07 /* Validation.swift */; };
 		956CA54A228409E700BB2A93 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 956CA549228409E600BB2A93 /* GoogleService-Info.plist */; };
 		9578D9E022939C65008EB905 /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9578D9DF22939C65008EB905 /* ChatListViewController.swift */; };
+		9578D9E32293B120008EB905 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9578D9E22293B120008EB905 /* ChatViewController.swift */; };
+		9578D9E52293B328008EB905 /* UserChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9578D9E42293B327008EB905 /* UserChat.swift */; };
+		9578D9E72293B5E9008EB905 /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9578D9E62293B5E8008EB905 /* Emoji.swift */; };
 		95809BCA228E8CE4005574A7 /* ErrorCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95809BC9228E8CE4005574A7 /* ErrorCustom.swift */; };
 		9587309B228E599D00E5A486 /* MessageItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9587309A228E599D00E5A486 /* MessageItemModel.swift */; };
 		9587309D228E5B7C00E5A486 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9587309C228E5B7C00E5A486 /* MessageModel.swift */; };
@@ -73,6 +76,9 @@
 		956120392282939B006C6F07 /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		956CA549228409E600BB2A93 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9578D9DF22939C65008EB905 /* ChatListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
+		9578D9E22293B120008EB905 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		9578D9E42293B327008EB905 /* UserChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserChat.swift; sourceTree = "<group>"; };
+		9578D9E62293B5E8008EB905 /* Emoji.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		95809BC9228E8CE4005574A7 /* ErrorCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCustom.swift; sourceTree = "<group>"; };
 		9587309A228E599D00E5A486 /* MessageItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageItemModel.swift; sourceTree = "<group>"; };
 		9587309C228E5B7C00E5A486 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
@@ -162,6 +168,14 @@
 			path = ChatList;
 			sourceTree = "<group>";
 		};
+		9578D9E12293B120008EB905 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				9578D9E22293B120008EB905 /* ChatViewController.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
 		95809BC8228E8CC2005574A7 /* Error */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,6 +254,7 @@
 				95E3EC7C228B01AF003A4A27 /* Filter.swift */,
 				9587309A228E599D00E5A486 /* MessageItemModel.swift */,
 				9587309C228E5B7C00E5A486 /* MessageModel.swift */,
+				9578D9E42293B327008EB905 /* UserChat.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -363,6 +378,7 @@
 		95ABA0A8227D95E600774D13 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				9578D9E62293B5E8008EB905 /* Emoji.swift */,
 				95ABA0B2227D98E700774D13 /* UIView+.swift */,
 				95ABA0B4227D990000774D13 /* UIViewController+Debug.swift */,
 				95ABA0B6227D991B00774D13 /* UIViewController+.swift */,
@@ -454,6 +470,7 @@
 		95E3EC8E228B0355003A4A27 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				9578D9E12293B120008EB905 /* Chat */,
 				9578D9DE22939C65008EB905 /* ChatList */,
 				95DBB00F2292B95F00AA6309 /* cell */,
 			);
@@ -651,6 +668,7 @@
 				95419B3B227FDA09004E174F /* LoginViewController.swift in Sources */,
 				95419B43227FDB5A004E174F /* Constants.swift in Sources */,
 				95809BCA228E8CE4005574A7 /* ErrorCustom.swift in Sources */,
+				9578D9E52293B328008EB905 /* UserChat.swift in Sources */,
 				95E3EC7D228B01AF003A4A27 /* Filter.swift in Sources */,
 				95ABA0C3227D9E6B00774D13 /* Screen.swift in Sources */,
 				9587309B228E599D00E5A486 /* MessageItemModel.swift in Sources */,
@@ -661,6 +679,7 @@
 				959F166222848B8000A68B89 /* RegisterViewController.swift in Sources */,
 				95E3EC99228B0355003A4A27 /* MainTabBarViewController.swift in Sources */,
 				9561203A2282939B006C6F07 /* Validation.swift in Sources */,
+				9578D9E72293B5E9008EB905 /* Emoji.swift in Sources */,
 				95CDD388228DCE5E00D00051 /* Connectivity.swift in Sources */,
 				95ABA0B3227D98E700774D13 /* UIView+.swift in Sources */,
 				95419B41227FDA7E004E174F /* StringsExtensions.swift in Sources */,
@@ -682,6 +701,7 @@
 				9578D9E022939C65008EB905 /* ChatListViewController.swift in Sources */,
 				95ABA0B7227D991B00774D13 /* UIViewController+.swift in Sources */,
 				959F166322848B8000A68B89 /* RegisterUploadImageViewController.swift in Sources */,
+				9578D9E32293B120008EB905 /* ChatViewController.swift in Sources */,
 				95E3EC7F228B020B003A4A27 /* Double+.swift in Sources */,
 				95E3EC9B228B0355003A4A27 /* ResultSearchTableViewCell.swift in Sources */,
 				95ABA0B5227D990000774D13 /* UIViewController+Debug.swift in Sources */,

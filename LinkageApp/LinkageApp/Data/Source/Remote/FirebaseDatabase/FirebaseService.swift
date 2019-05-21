@@ -186,6 +186,21 @@ extension FirebaseService {
                 completion([], err)
             })
     }
+    
+    func listenMessage(messageID: String, callback: @escaping(Error?, MessageItemModel?) -> Void) {
+        ref.child(KeyFirebaseDatabase.message)
+            .child(messageID)
+            .child(KeyFirebaseDatabase.message)
+            .observe(.childChanged,
+                     with: { (snap) in
+                        if let value = snap.value as? [String: Any] {
+                            callback (nil, MessageItemModel(JSON: value))
+                        }
+                        callback(nil, nil)
+            }, withCancel: { (err) in
+                callback(err, nil)
+            })
+    }
 }
 
 // MARK: - Request Method

@@ -19,13 +19,13 @@ final class ChatListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configView()
-        loadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.title = TitleScreen.chatScreen
         tabBarController?.delegate = self
+        loadData()
     }
     
     // MARK: - Method
@@ -66,7 +66,7 @@ final class ChatListViewController: UIViewController {
                                         self?.showErrorAlert(errMessage: err.localizedDescription)
                                     } else {
                                         self?.data = results.sorted(by: {
-                                            $0.messagelast.date < $1.messagelast.date
+                                            $0.messagelast.date > $1.messagelast.date
                                         })
                                         self?.tableView.reloadData()
                                     }
@@ -81,6 +81,9 @@ final class ChatListViewController: UIViewController {
 extension ChatListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let chatVC = ChatViewController()
+        chatVC.model = data[indexPath.row]
+        navigationController?.pushViewController(chatVC, animated: true)
     }
 }
 
