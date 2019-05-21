@@ -9,7 +9,6 @@
 import MessengerKit
 import FirebaseDatabase
 
-// swiftlint:disable number_separator
 final class ChatViewController: MSGMessengerViewController {
     
     // MARK: - Properties
@@ -42,27 +41,28 @@ final class ChatViewController: MSGMessengerViewController {
     private func configView() {
         delegate = self
         dataSource = self
-        loadData(scrollBottom: true, fromDate: Date().timeIntervalSince1970 * 1000)
+        loadData(scrollBottom: true,
+                 fromDate: Date().timeIntervalSince1970.convertToTimeIntervalFirebase)
         guard let model = model else {
             return
         }
         FirebaseService.share
             .listenMessage(messageID: model.messageModel.id) {[weak self] (err, mess) in
-                guard let strongSelf = self,
-                    let auth = AuthManagerLocalDataSource.shared.getUser() else {
+                guard let auth = AuthManagerLocalDataSource.shared.getUser() else {
                         return
                 }
-                if let mess = mess {
-                    strongSelf.messageID += 1
+                self?.messageID += 1
+                if let mess = mess,
+                    let messageID = self?.messageID {
                     let isSender = auth.uid == mess.fromID
-                    let sentAt = Date(timeIntervalSince1970: mess.date / 1000)
-                    strongSelf.insert(MSGMessage(id: strongSelf.messageID,
-                                                 body: mess.content.convertMSBody,
-                                                 user: UserChat(displayName: mess.fromID,
-                                                                isSender: isSender),
+                    let sentAt = Date(timeIntervalSince1970: mess.date.convertTimeIntervalFromFirebase)
+                    self?.insert(MSGMessage(id: messageID,
+                                            body: mess.content.convertMSBody,
+                                            user: UserChat(displayName: mess.fromID,
+                                                           isSender: isSender),
                                                  sentAt: sentAt))
                 } else if let err = err {
-                    strongSelf.showErrorAlert(errMessage: err.localizedDescription)
+                    self?.showErrorAlert(errMessage: err.localizedDescription)
                 }
             }
     }
@@ -93,12 +93,12 @@ final class ChatViewController: MSGMessengerViewController {
                                 } else {
                                     strongSelf.insert(listMessage.map({ (item) -> MSGMessage in
                                         let isSender = auth.uid == item.fromID
-                                        let sentAt = Date(timeIntervalSince1970: item.date / 1000)
+                                        let sentAt = Date(timeIntervalSince1970: item.date
+                                            .convertTimeIntervalFromFirebase)
                                         strongSelf.messageID += 1
                                         return MSGMessage(id: strongSelf.messageID,
                                                           body: item.content.convertMSBody,
                                                           user: UserChat(displayName: item.fromID,
-                                                                         avatar: nil,
                                                                          isSender: isSender),
                                                           sentAt: sentAt)
                                     }), scrollbottom: scrollBottom)
@@ -191,7 +191,8 @@ extension ChatViewController {
             indexPath.item == 0,
             !endOfListMessage {
             loadData(scrollBottom: false,
-                     fromDate: messages[0][0].sentAt.timeIntervalSince1970 * 1000 - 1,
+                     fromDate: messages[0][0].sentAt.timeIntervalSince1970
+                        .convertToTimeIntervalFirebase - 1,
                      numberLimited: 10)
         }
     }
