@@ -60,4 +60,5 @@ enum ButtonTitle {
 enum TitleScreen {
     static let searchByDistanceScreen = "Seach by Distance"
     static let requestScren = "Request"
+    static let chatScreen = "Chat"
 }
