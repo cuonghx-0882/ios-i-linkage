@@ -1,0 +1,47 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'LinkageApp' do
+  use_frameworks!
+
+  # Convention
+  pod 'SwiftLint', '~> 0.31.0'
+  
+  # Core
+  pod 'Reusable', '4.0.5'
+  pod 'Then', '2.4'
+  
+  # Networking
+  pod 'Alamofire', '~> 4.7.1'
+  
+  #Mapping
+  pod 'AlamofireObjectMapper', '~> 5.0.0'
+  
+  
+  pod 'SVProgressHUD', '~> 2.2.5'
+  
+  # Firebase
+  pod 'Firebase/Database'
+  pod 'Firebase'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Auth'
+
+  # TensorFlow
+  pod 'TensorFlow-experimental'
+  
+  #ImagePicker
+  pod 'ImagePicker'
+  
+  #Kingfisher
+  pod 'Kingfisher', '<= 4.9.0'
+  
+  #Popup
+  pod 'KUIPopOver'
+  
+  #Toaster
+  pod 'Toaster', '<= 2.1.1'
+  
+  #Chat
+  pod 'MessengerKit', :git => 'https://github.com/steve228uk/MessengerKit.git', :commit => ‘c46be0e’
+  
+end
