@@ -191,7 +191,10 @@ extension FirebaseService {
         ref.child(KeyFirebaseDatabase.message)
             .child(messageID)
             .child(KeyFirebaseDatabase.message)
-            .observe(.childChanged,
+            .queryOrdered(byChild: "date")
+            .queryStarting(atValue: Date().timeIntervalSince1970.convertToTimeIntervalFirebase)
+            .queryLimited(toLast: 1)
+            .observe(.childAdded,
                      with: { (snap) in
                         if let value = snap.value as? [String: Any] {
                             callback (nil, MessageItemModel(JSON: value))
@@ -231,7 +234,7 @@ extension FirebaseService {
                                             var mes = MessageModel(JSON: value),
                                             (mes.user.last == uid && !connected) ||
                                                 (mes.user.index(of: uid) != nil && connected),
-                                            let fromUser = mes.user.first {
+                                            var fromUser = mes.user.first {
                                             mes.id = snap.key
                                             let date = Date().timeIntervalSince1970
                                                 .convertToTimeIntervalFirebase
@@ -248,6 +251,9 @@ extension FirebaseService {
                                                                     dispathGroupChild.leave()
                                             })
                                             dispathGroupChild.enter()
+                                            if let last = mes.user.last, last != uid {
+                                                fromUser = last
+                                            }
                                             self.getUserFromUID(uid: fromUser ,
                                                                 completion: { (u, _) in
                                                                     user = u
@@ -271,5 +277,20 @@ extension FirebaseService {
             }, withCancel: { (err) in
                 completion([], err)
             })
+    }
+}
+
+// MARK: - Update
+extension FirebaseService {
+    func updateProfileforKey(userID: String,
+                             key: String,
+                             value: Any,
+                             completion:@escaping (Error?) -> Void) {
+        ref.child(KeyFirebaseDatabase.usersDatabase)
+            .child(userID)
+            .child(key)
+            .setValue(value) { (err, _) in
+                completion(err)
+            }
     }
 }

@@ -46,6 +46,10 @@ enum Validation {
                                                    max: toDistance) {
             return false
         }
+        if !filter.enable100km,
+            model.location.distance > 100.0.tom {
+            return false
+        }
         return true
     }
     
@@ -82,6 +86,9 @@ enum Validation {
             if !Validation.isValidateDate(date: dob) {
                 vc.showErrorAlert(errMessage: Message.dobFieldNotValid)
                 return false
+            }
+            if let age = dob.getAgeFromDateString(), age < 14 {
+                vc.showErrorAlert(errMessage: Message.limitedAge)
             }
         }
         return true

@@ -17,10 +17,11 @@ final class NavigationController: UINavigationController {
     }
     
     // MARK: - Method
-    private func config() {
+    func config() {
         if AuthManagerLocalDataSource.shared.getUser() != nil {
             handlerGotoMainScreen()
         } else {
+            isNavigationBarHidden = true
             let loginScreen = LoginViewController.instantiate()
             viewControllers = [loginScreen]
         }
@@ -34,8 +35,10 @@ final class NavigationController: UINavigationController {
             return
         }
         if user.urlImage.isEmpty {
+            isNavigationBarHidden = true
             pushViewController(RegisterUploadImageViewController.instantiate(), animated: false)
         } else {
+            isNavigationBarHidden = false
             viewControllers = [MainTabBarViewController.instantiate()]
         }
     }

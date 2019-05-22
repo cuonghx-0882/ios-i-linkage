@@ -9,7 +9,7 @@
 import CoreLocation
 import KUIPopOver
 
-final class SearchByDistanceViewController: UIViewController {
+final class SearchByDistanceViewController: BaseViewController {
 
     // MARK: IBOutlets
     @IBOutlet private weak var tableView: UITableView!
@@ -30,7 +30,7 @@ final class SearchByDistanceViewController: UIViewController {
         let popup = FilterPopup(frame: CGRect(x: 0,
                                               y: 0,
                                               width: 290,
-                                              height: 199)).then {
+                                              height: 252)).then {
                                                 $0.delegate = self
         }
         return popup
@@ -113,7 +113,13 @@ final class SearchByDistanceViewController: UIViewController {
                     var dataSorted = locations.sorted(by: { $0.location.distance < $1.location.distance })
                     dataSorted.removeFirst()
                     self?.data = dataSorted
-                    self?.filteredData = dataSorted
+                    self?.handlerFilterButton(filterPopup: nil,
+                                              filter: Filter(ageFrom: "",
+                                                             ageTo: "",
+                                                             distanceFrom: "",
+                                                             distanceTo: "",
+                                                             gender: 0,
+                                                             enable100km: false))
                     self?.tableView.reloadData()
                 }
             }
@@ -213,8 +219,8 @@ extension SearchByDistanceViewController: FilterPopupDelegate {
         tableView.reloadData()
     }
     
-    func handlerFilterButton(filterPopup: FilterPopup, filter: Filter) {
-        filterPopup.dismissPopover(animated: true)
+    func handlerFilterButton(filterPopup: FilterPopup?, filter: Filter) {
+        filterPopup?.dismissPopover(animated: true)
         if !Validation.checkValidateFilter(filter: filter) {
             showAlertView(title: Message.filterNotValidate,
                           message: Message.filterNotValidateMS,

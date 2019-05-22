@@ -17,6 +17,12 @@ final class RegisterViewController: BaseViewController {
     @IBOutlet private weak var genderSegment: UISegmentedControl!
     
     // MARK: - Properties
+    private lazy var datePicker: UIDatePicker = {
+        let picker = UIDatePicker().then({
+            $0.datePickerMode = .date
+        })
+        return picker
+    }()
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -27,6 +33,36 @@ final class RegisterViewController: BaseViewController {
     // MARK: - Method
     private func configView() {
         hideKeyboardWhenTappedAround()
+        let toolbar = UIToolbar().then {
+            $0.sizeToFit()
+            $0.setItems([UIBarButtonItem(title: "Done",
+                                         style: .plain,
+                                         target: nil,
+                                         action: #selector(donedatePicker)),
+                         UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
+                                         target: nil,
+                                         action: nil),
+                         UIBarButtonItem(title: "Cancel",
+                                         style: .plain,
+                                         target: nil,
+                                         action: #selector(canceldatePicker))],
+                        animated: false)
+        }
+        dobTextField.do {
+            $0.inputAccessoryView = toolbar
+            $0.inputView = datePicker
+        }
+    }
+    
+    @objc
+    private func donedatePicker() {
+        dobTextField.text = datePicker.date.toString(dateFormat: "dd/MM/yyyy")
+        view.endEditing(true)
+    }
+    
+    @objc
+    func canceldatePicker() {
+        view.endEditing(true)
     }
     
     @IBAction func handlerRegisterButton(_ sender: UIButton) {
@@ -44,7 +80,7 @@ final class RegisterViewController: BaseViewController {
                                            dob: dob) {
             return
         }
-        let gender = self.genderSegment.selectedSegmentIndex == 1 ? true : false
+        let gender = self.genderSegment.selectedSegmentIndex == 0 ? true : false
         progessAnimation(true)
         UserRepository.shared.signUp(email: email,
                                      password: password,

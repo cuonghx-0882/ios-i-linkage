@@ -6,7 +6,7 @@
 //  Copyright © 2019 Sun*. All rights reserved.
 //
 
-final class ChatListViewController: UIViewController {
+final class ChatListViewController: BaseViewController {
 
     // MARK: - Outlets
     @IBOutlet private weak var tableView: UITableView!

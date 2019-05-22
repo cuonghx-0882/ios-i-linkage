@@ -12,4 +12,5 @@ struct Filter {
     var distanceFrom: String
     var distanceTo: String
     var gender: Int
+    var enable100km: Bool
 }

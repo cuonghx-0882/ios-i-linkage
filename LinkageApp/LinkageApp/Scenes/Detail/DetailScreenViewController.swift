@@ -9,7 +9,7 @@
 import Kingfisher
 import Toaster
 
-final class DetailScreenViewController: UIViewController {
+final class DetailScreenViewController: BaseViewController {
     
     // MARK: - Outlets
     @IBOutlet private weak var avatarImageView: UIImageView!

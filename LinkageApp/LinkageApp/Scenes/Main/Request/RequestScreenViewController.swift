@@ -8,7 +8,7 @@
 
 import MessengerKit
 
-final class RequestScreenViewController: UIViewController {
+final class RequestScreenViewController: BaseViewController {
     
     // MARK: - Outlets
     @IBOutlet private weak var tableView: UITableView!
@@ -93,8 +93,13 @@ extension RequestScreenViewController: UITableViewDelegate {
                                                     if let err = err {
                                                         self?.showErrorAlert(errMessage: err.localizedDescription)
                                                     } else {
-                                                        self?.data.remove(at: indexPath.row)
+                                                        let model = self?.data.remove(at: indexPath.row)
                                                         self?.tableView.reloadData()
+                                                        let chatVC = ChatViewController()
+                                                        chatVC.model = model
+                                                        self?.navigationController?
+                                                            .pushViewController(chatVC,
+                                                                                animated: true)
                                                     }
                             })
                         case 1:

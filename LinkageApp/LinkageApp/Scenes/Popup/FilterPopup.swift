@@ -9,7 +9,7 @@
 import KUIPopOver
 
 protocol FilterPopupDelegate: class {
-    func handlerFilterButton(filterPopup: FilterPopup, filter: Filter)
+    func handlerFilterButton(filterPopup: FilterPopup?, filter: Filter)
     func handlerClearButton(filterPopup: FilterPopup)
 }
 
@@ -24,6 +24,7 @@ final class FilterPopup: UIView, NibOwnerLoadable, KUIPopOverUsable {
     @IBOutlet private weak var ageToTextField: UITextField!
     @IBOutlet private weak var distanceFromTextField: UITextField!
     @IBOutlet private weak var distanceToTextField: UITextField!
+    @IBOutlet private weak var greaterThanSwitch: UISwitch!
     
     // MARK: - Life Cycle
     required init?(coder aDecoder: NSCoder) {
@@ -47,7 +48,7 @@ final class FilterPopup: UIView, NibOwnerLoadable, KUIPopOverUsable {
         distanceToTextField.text = ""
         ageFromTextField.text = ""
         ageToTextField.text = ""
-        
+        greaterThanSwitch.setOn(false, animated: true)
     }
     
     @IBAction private func handlerFilterButton(_ sender: UIButton) {
@@ -59,7 +60,8 @@ final class FilterPopup: UIView, NibOwnerLoadable, KUIPopOverUsable {
                                 ageTo: ageTo,
                                 distanceFrom: distanceFrom,
                                 distanceTo: distanceTo,
-                                gender: genderSegmentControl.selectedSegmentIndex)
+                                gender: genderSegmentControl.selectedSegmentIndex,
+                                enable100km: greaterThanSwitch.isOn)
             delegate?.handlerFilterButton(filterPopup: self, filter: filter)
         }
     }

@@ -41,6 +41,8 @@ enum Message {
     static let sendGRMSTitle = "Send a greeting message"
     static let messageEmpty = "This message cannot be empty"
     static let mesageRequest = " sent you a message, Do you want to connect with them"
+    static let limitedAge = "You must be 14 years old or above"
+    static let editDOB = "Click to Edit Date Of Birth"
 }
 
 enum Title {
@@ -48,6 +50,7 @@ enum Title {
     static let jobTT = "Job: "
     static let hobbiesTT = "Hobbies: "
     static let justNow = "Just now"
+    static let addnewData = "Click edit icon to add new data"
 }
 
 enum ButtonTitle {
@@ -61,4 +64,6 @@ enum TitleScreen {
     static let searchByDistanceScreen = "Seach by Distance"
     static let requestScren = "Request"
     static let chatScreen = "Chat"
+    static let profile = "Profile"
+    static let edit = "Edit"
 }

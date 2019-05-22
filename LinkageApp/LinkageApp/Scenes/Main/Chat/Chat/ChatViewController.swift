@@ -23,6 +23,10 @@ final class ChatViewController: MSGMessengerViewController {
         configView()
     }
     
+    deinit {
+        logDeinit()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let button = UIButton(type: .system).then {
@@ -161,7 +165,7 @@ extension ChatViewController {
         }
         self.collectionView.reloadData()
         if scrollbottom {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.collectionView.scrollToBottom(animated: true)
             }
             collectionView.layoutTypingLabelIfNeeded()
