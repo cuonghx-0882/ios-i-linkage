@@ -21,7 +21,7 @@ final class ResultSearchTableViewCell: UITableViewCell, NibReusable {
     func setContent(model: ModelCellResult) {
         distanceLabel.text = String(format: "Distance: %.1fkm", model.location.distance.tokm)
         nameLabel.text = model.user.name
-        genderImageView.image = model.user.gender ? UIImage(named: "male") :
+        genderImageView.image = model.user.isMale ? UIImage(named: "male") :
             UIImage(named: "female")
         let url = URL(string: model.user.urlImage)
         avatarImageView.kf.setImage(with: url)

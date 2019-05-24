@@ -129,7 +129,7 @@ final class ProfileViewController: BaseViewController {
             return
         }
         avatarImageView.kf.setImage(with: URL(string: auth.urlImage))
-        genderImageView.image = auth.gender ? UIImage(named: "male") : UIImage(named: "female")
+        genderImageView.image = auth.isMale ? UIImage(named: "male") : UIImage(named: "female")
         nameLabel.text = auth.name
         jobLabel.text = auth.job.isEmpty ? Title.addnewData : auth.job
         descriptionLabel.text = auth.description.isEmpty ? Title.addnewData : auth.description

@@ -42,7 +42,7 @@ final class DetailScreenViewController: BaseViewController {
                 : Title.descriptionTT + "\(model.description)"
             hobbiesLabel.text = model.hobbies.isEmpty ? ""
                 : Title.hobbiesTT + "\(model.hobbies)"
-            genderImageView.image = model.gender ? UIImage(named: "male") :
+            genderImageView.image = model.isMale ? UIImage(named: "male") :
                 UIImage(named: "female")
             let url = URL(string: model.urlImage)
             avatarImageView.kf.setImage(with: url)

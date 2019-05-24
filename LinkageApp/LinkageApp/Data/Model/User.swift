@@ -16,7 +16,7 @@ struct User {
     var hobbies: String
     var description: String
     var dob: String
-    var gender: Bool
+    var isMale: Bool
 }
 
 extension User {
@@ -29,7 +29,7 @@ extension User {
             hobbies: "",
             description: "",
             dob: "",
-            gender: true)
+            isMale: true)
     }
 }
 extension User: Mappable {
@@ -46,7 +46,7 @@ extension User: Mappable {
         self.hobbies <- map["hobbies"]
         self.description <- map["description"]
         self.dob <- map["dob"]
-        self.gender <- map["gender"]
+        self.isMale <- map["gender"]
     }
     
 }

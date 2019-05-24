@@ -36,7 +36,7 @@ final class EditNameViewController: BaseViewController {
             return
         }
         nameTextView.text = auth.name
-        genderSegment.selectedSegmentIndex = auth.gender ? 0 : 1
+        genderSegment.selectedSegmentIndex = auth.isMale ? 0 : 1
     }
     
     @IBAction func handleSaveButton(_ sender: UIButton) {
@@ -45,7 +45,7 @@ final class EditNameViewController: BaseViewController {
         }
         if Connectivity.isConnectedToInternet {
             auth.name = nameTextView.text
-            auth.gender = genderSegment.selectedSegmentIndex == 0 ?  true : false
+            auth.isMale = genderSegment.selectedSegmentIndex == 0 
             FirebaseService.share.saveUser(user: auth) {[weak self] (err) in
                 self?.dismissPopover(animated: true)
                 if let err = err {

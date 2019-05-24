@@ -80,13 +80,13 @@ final class RegisterViewController: BaseViewController {
                                            dob: dob) {
             return
         }
-        let gender = self.genderSegment.selectedSegmentIndex == 0 ? true : false
+        let isMale = self.genderSegment.selectedSegmentIndex == 0 
         progessAnimation(true)
         UserRepository.shared.signUp(email: email,
                                      password: password,
                                      name: name,
                                      dob: dob,
-                                     gender: gender) {[weak self] (user, err) in
+                                     isMale: isMale) {[weak self] (user, err) in
                                         self?.progessAnimation(false)
                                         if let err = err {
                                             self?.showErrorAlert(errMessage: err.localizedDescription)

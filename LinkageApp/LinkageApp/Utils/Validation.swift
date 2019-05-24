@@ -30,9 +30,9 @@ enum Validation {
     static func modelValidateWithFilter(model: ModelCellResult, filter: Filter) -> Bool {
         switch filter.gender {
         case 1:
-            if !model.user.gender { return false }
+            if !model.user.isMale { return false }
         case 2:
-            if model.user.gender { return false }
+            if model.user.isMale { return false }
         default:
             break
         }

@@ -14,7 +14,7 @@ protocol UserRepositoryType {
                 password: String,
                 name: String,
                 dob: String,
-                gender: Bool,
+                isMale: Bool,
                 completion: @escaping (User?, Error?) -> Void)
     func logout()
     func forgot(email: String, completion: @escaping (Error?) -> Void)
@@ -45,7 +45,7 @@ final class UserRepository: UserRepositoryType {
                 password: String,
                 name: String,
                 dob: String,
-                gender: Bool,
+                isMale: Bool,
                 completion: @escaping (User?, Error?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (auth, err) in
             if let authUser = auth?.user {
@@ -56,7 +56,7 @@ final class UserRepository: UserRepositoryType {
                                 hobbies: "",
                                 description: "",
                                 dob: dob,
-                                gender: gender)
+                                isMale: isMale)
                 FirebaseService.share.saveUser(user: user, completion: { (err) in
                     if let err = err {
                         completion(nil, err)
