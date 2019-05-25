@@ -65,34 +65,34 @@ extension FirebaseService {
                         completion: @escaping ([ModelCellResult], Error?) -> Void) {
         let locationKey = KeyFirebaseDatabase.locationDatabase
         ref.child(locationKey)
-            .observe(.value,
-                     with: { (snap) in
-                        var results = [ModelCellResult]()
-                        let dispathGroup = DispatchGroup()
-                        for item in snap.children {
-                            if let snapshot = item as? DataSnapshot,
-                                let value = snapshot.value as? [String: Any],
-                                var location = Location(JSON: value) {
-                                let coordinate = CLLocation(latitude: location.lat,
-                                                            longitude: location.long)
-                                let currentCD = CLLocation(latitude: currentLocation.lat,
-                                                           longitude: currentLocation.long)
-                                location.distance = coordinate.distance(from: currentCD)
-                                dispathGroup.enter()
-                                self.getUserFromUID(uid: snapshot.key,
-                                                    completion: { (user, _ ) in
-                                                        if let user = user {
-                                                            let result = ModelCellResult(user: user,
-                                                                                         location: location)
-                                                            results.append(result)
-                                                        }
-                                                        dispathGroup.leave()
-                                })
-                            }
-                        }
-                        dispathGroup.notify(queue: .main, execute: {
-                            completion(results, nil)
-                        })
+            .observeSingleEvent(of: .value,
+                                with: { (snap) in
+                                    var results = [ModelCellResult]()
+                                    let dispathGroup = DispatchGroup()
+                                    for item in snap.children {
+                                        if let snapshot = item as? DataSnapshot,
+                                            let value = snapshot.value as? [String: Any],
+                                            var location = Location(JSON: value) {
+                                            let coordinate = CLLocation(latitude: location.lat,
+                                                                        longitude: location.long)
+                                            let currentCD = CLLocation(latitude: currentLocation.lat,
+                                                                       longitude: currentLocation.long)
+                                            location.distance = coordinate.distance(from: currentCD)
+                                            dispathGroup.enter()
+                                            self.getUserFromUID(uid: snapshot.key,
+                                                                completion: { (user, _ ) in
+                                                                    if let user = user {
+                                                                        let result = ModelCellResult(user: user,
+                                                                                                     location: location)
+                                                                        results.append(result)
+                                                                    }
+                                                                    dispathGroup.leave()
+                                            })
+                                        }
+                                    }
+                                    dispathGroup.notify(queue: .main, execute: {
+                                        completion(results, nil)
+                                    })
             }, withCancel: { (err) in
                 completion([], err)
             })
@@ -292,5 +292,67 @@ extension FirebaseService {
             .setValue(value) { (err, _) in
                 completion(err)
             }
+    }
+}
+
+// MARK: - Facenet
+extension FirebaseService {
+    func pushVectorFacenet(userID: String,
+                           model: ModelFaceNet,
+                           completion: @escaping (Error?) -> Void) {
+        let facenetKey = KeyFirebaseDatabase.facenet
+        ref.child(facenetKey).child(userID).setValue(model.toJSON()) { (err, _ ) in
+            completion(err)
+        }
+    }
+    
+    func getVectorFromServer(userID: String,
+                             completion: @escaping (ModelFaceNet?, Error?) -> Void) {
+        let facenetKey = KeyFirebaseDatabase.facenet
+        ref.child(facenetKey)
+            .child(userID)
+            .observeSingleEvent(of: .value,
+                                with: { (snap) in
+                                    if let value = snap.value as? [String: Any] {
+                                        completion(ModelFaceNet(JSON: value), nil)
+                                    } else {
+                                        completion(nil, nil)
+                                    }
+            }, withCancel: { (err) in
+                completion(nil, err)
+            })
+    }
+    
+    func getAllFacenet(currentFacenet: ModelFaceNet,
+                       completion: @escaping ([ModelFaceNet], Error?) -> Void) {
+        let facenetKey = KeyFirebaseDatabase.facenet
+        ref.child(facenetKey)
+            .observeSingleEvent(of: .value,
+                                with: { (snap) in
+                                    var results = [ModelFaceNet]()
+                                    let dispathGroup = DispatchGroup()
+                                    for item in snap.children {
+                                        if let snapshot = item as? DataSnapshot,
+                                            let value = snapshot.value as? [String: Any],
+                                            var model = ModelFaceNet(JSON: value),
+                                            snapshot.key != currentFacenet.user?.uid {
+                                            model.distance = Utils.getDistanceMin(f1: currentFacenet,
+                                                                                  f2: model)
+                                            dispathGroup.enter()
+                                            self.getUserFromUID(uid: snapshot.key,
+                                                                completion: { (user, _ ) in
+                                                                    model.user = user
+                                                                    results.append(model)
+                                                                    dispathGroup.leave()
+                                            })
+                                        }
+                                    }
+                                    dispathGroup.notify(queue: .main, execute: {
+                                        completion(results, nil)
+                                    })
+            }, withCancel: { (err) in
+                completion([], err)
+            })
+                       
     }
 }

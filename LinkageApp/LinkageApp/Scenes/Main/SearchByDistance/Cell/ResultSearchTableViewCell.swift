@@ -31,4 +31,21 @@ final class ResultSearchTableViewCell: UITableViewCell, NibReusable {
             ageLabel.text = ""
         }
     }
+    
+    func setContent(model: ModelFaceNet) {
+        guard let user = model.user else {
+            return
+        }
+        distanceLabel.text = String(format: "Same: %.1f", model.distance.toPercent) + "%"
+        nameLabel.text = user.name
+        genderImageView.image = user.isMale ? UIImage(named: "male") :
+            UIImage(named: "female")
+        let url = URL(string: user.urlImage)
+        avatarImageView.kf.setImage(with: url)
+        if let age = user.dob.getAgeFromDateString() {
+            ageLabel.text = "Age: \(age)"
+        } else {
+            ageLabel.text = ""
+        }
+    }
 }

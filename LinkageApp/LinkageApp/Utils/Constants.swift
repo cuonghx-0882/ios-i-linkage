@@ -43,6 +43,11 @@ enum Message {
     static let mesageRequest = " sent you a message, Do you want to connect with them"
     static let limitedAge = "You must be 14 years old or above"
     static let editDOB = "Click to Edit Date Of Birth"
+    static let dataAvailable = "Data for identification is available"
+    static let reuseMS = "Do you want to use it again to search"
+    static let selectImageMS = "Select 3 photos for best results, your image will be private"
+    static let cantdetectMS = "Your image can't detect"
+    static let selectOtherIMGMS = "Please select other image to continue"
 }
 
 enum Title {
@@ -51,6 +56,7 @@ enum Title {
     static let hobbiesTT = "Hobbies: "
     static let justNow = "Just now"
     static let addnewData = "Click edit icon to add new data"
+    static let selectImage = "You need select an image to continue"
 }
 
 enum ButtonTitle {
@@ -66,4 +72,5 @@ enum TitleScreen {
     static let chatScreen = "Chat"
     static let profile = "Profile"
     static let edit = "Edit"
+    static let searchByFacenet = "Search By Facenet"
 }

@@ -131,4 +131,30 @@ enum Validation {
         }
         return true
     }
+    
+    static func modelValidateWithFilter(model: ModelFaceNet, filter: Filter) -> Bool {
+        
+        guard let user = model.user else {
+            return false
+        }
+        switch filter.gender {
+        case 1:
+            if !user.isMale { return false }
+        case 2:
+            if user.isMale { return false }
+        default:
+            break
+        }
+        let fromDistance = filter.distanceFrom.isEmpty ? "" : filter.distanceFrom
+        let toDistance = filter.distanceTo.isEmpty ? "" : filter.distanceTo
+        if !Validation.checkValidateNumberInRange(number: user.dob.getAgeFromDateString(),
+                                                  min: filter.ageFrom,
+                                                  max: filter.ageTo) ||
+            !Validation.checkValidateNumberInRange(number: Int(model.distance.toPercent),
+                                                   min: fromDistance,
+                                                   max: toDistance) {
+            return false
+        }
+        return true
+    }
 }

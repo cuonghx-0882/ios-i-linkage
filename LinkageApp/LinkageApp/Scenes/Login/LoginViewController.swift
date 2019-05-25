@@ -14,6 +14,7 @@ final class LoginViewController: BaseViewController {
     @IBOutlet private weak var emailTextField: UITextField!
     @IBOutlet private weak var passwordTextField: UITextField!
     @IBOutlet private weak var logoImageView: UIImageView!
+    @IBOutlet private weak var scrollView: UIScrollView!
     
     // MARK: - Properties
     
@@ -118,6 +119,20 @@ extension LoginViewController: UITextFieldDelegate {
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        scrollView.do {
+            $0.isScrollEnabled = true
+            $0.scrollToBottom()
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+        scrollView.do {
+            $0.setContentOffset(.zero, animated: true)
+            $0.isScrollEnabled = false
+        }
     }
 }
 

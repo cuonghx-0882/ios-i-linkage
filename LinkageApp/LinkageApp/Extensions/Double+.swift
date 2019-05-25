@@ -20,4 +20,9 @@ extension Double {
     var convertTimeIntervalFromFirebase: Double {
         return self / 1000
     }
+    var toPercent: Double {
+        let min = 0.4
+        let max = 2.0
+        return Utils.inRangerPercent(num: (max - self) / (max - min)) * 100
+    }
 }

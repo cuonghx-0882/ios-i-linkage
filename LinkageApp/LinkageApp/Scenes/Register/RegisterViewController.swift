@@ -15,6 +15,7 @@ final class RegisterViewController: BaseViewController {
     @IBOutlet private weak var nameTextField: UITextField!
     @IBOutlet private weak var dobTextField: UITextField!
     @IBOutlet private weak var genderSegment: UISegmentedControl!
+    @IBOutlet private weak var scrollView: UIScrollView!
     
     // MARK: - Properties
     private lazy var datePicker: UIDatePicker = {
@@ -115,5 +116,21 @@ extension RegisterViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == dobTextField {
+            scrollView.do {
+                $0.isScrollEnabled = true
+                $0.scrollToBottom()
+            }
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+        scrollView.do {
+            $0.setContentOffset(.zero, animated: true)
+            $0.isScrollEnabled = false
+        }
     }
 }

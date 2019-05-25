@@ -38,8 +38,8 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GIE-Gd-ciL">
-                        <rect key="frame" x="118" y="53" width="0.0" height="0.0"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GIE-Gd-ciL">
+                        <rect key="frame" x="118" y="47.5" width="49.5" height="14.5"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -60,7 +60,6 @@
                 <constraints>
                     <constraint firstItem="AyL-Ah-FDj" firstAttribute="width" secondItem="AyL-Ah-FDj" secondAttribute="height" multiplier="1:1" id="3fJ-9m-Spi"/>
                     <constraint firstItem="AyL-Ah-FDj" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-16" id="4Hn-Hy-rw7"/>
-                    <constraint firstItem="GIE-Gd-ciL" firstAttribute="centerY" secondItem="5Y7-pw-ESL" secondAttribute="centerY" id="BhC-2s-mIv"/>
                     <constraint firstItem="9k5-MZ-2Cs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="CQZ-ww-MUn"/>
                     <constraint firstItem="Qe5-3C-0nu" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-16" id="FMO-Ha-3o5"/>
                     <constraint firstAttribute="bottom" secondItem="9k5-MZ-2Cs" secondAttribute="bottom" constant="8" id="Ga8-rq-YpI"/>
@@ -71,6 +70,7 @@
                     <constraint firstItem="9k5-MZ-2Cs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="fDf-cA-HLM"/>
                     <constraint firstItem="Qe5-3C-0nu" firstAttribute="leading" secondItem="9k5-MZ-2Cs" secondAttribute="trailing" constant="8" id="ffV-kZ-W4W"/>
                     <constraint firstItem="AyL-Ah-FDj" firstAttribute="leading" secondItem="Qe5-3C-0nu" secondAttribute="trailing" constant="4" id="hS6-Po-O7Q"/>
+                    <constraint firstItem="GIE-Gd-ciL" firstAttribute="bottom" secondItem="5Y7-pw-ESL" secondAttribute="bottom" id="i4R-Wz-OIh"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

@@ -113,6 +113,7 @@ final class SearchByDistanceViewController: BaseViewController {
                     var dataSorted = locations.sorted(by: { $0.location.distance < $1.location.distance })
                     dataSorted.removeFirst()
                     self?.data = dataSorted
+                    self?.filterPopup.clearFilter()
                     self?.handlerFilterButton(filterPopup: nil,
                                               filter: Filter(ageFrom: "",
                                                              ageTo: "",
