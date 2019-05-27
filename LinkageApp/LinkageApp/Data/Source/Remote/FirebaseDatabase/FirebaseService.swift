@@ -67,35 +67,35 @@ extension FirebaseService {
         ref.child(locationKey)
             .observeSingleEvent(of: .value,
                                 with: { (snap) in
-                                    var results = [ModelCellResult]()
-                                    let dispathGroup = DispatchGroup()
-                                    for item in snap.children {
-                                        if let snapshot = item as? DataSnapshot,
-                                            let value = snapshot.value as? [String: Any],
-                                            var location = Location(JSON: value) {
-                                            let coordinate = CLLocation(latitude: location.lat,
-                                                                        longitude: location.long)
-                                            let currentCD = CLLocation(latitude: currentLocation.lat,
-                                                                       longitude: currentLocation.long)
-                                            location.distance = coordinate.distance(from: currentCD)
-                                            dispathGroup.enter()
-                                            self.getUserFromUID(uid: snapshot.key,
-                                                                completion: { (user, _ ) in
-                                                                    if let user = user {
-                                                                        let result = ModelCellResult(user: user,
-                                                                                                     location: location)
-                                                                        results.append(result)
-                                                                    }
-                                                                    dispathGroup.leave()
-                                            })
-                                        }
-                                    }
-                                    dispathGroup.notify(queue: .main, execute: {
-                                        completion(results, nil)
-                                    })
-            }, withCancel: { (err) in
-                completion([], err)
-            })
+                var results = [ModelCellResult]()
+                let dispathGroup = DispatchGroup()
+                for item in snap.children {
+                    if let snapshot = item as? DataSnapshot,
+                        let value = snapshot.value as? [String: Any],
+                        var location = Location(JSON: value) {
+                        let coordinate = CLLocation(latitude: location.lat,
+                                                    longitude: location.long)
+                        let currentCD = CLLocation(latitude: currentLocation.lat,
+                                                   longitude: currentLocation.long)
+                        location.distance = coordinate.distance(from: currentCD)
+                        dispathGroup.enter()
+                        self.getUserFromUID(uid: snapshot.key,
+                                            completion: { (user, _ ) in
+                                                if let user = user {
+                                                    let result = ModelCellResult(user: user,
+                                                                                 location: location)
+                                                    results.append(result)
+                                                }
+                                                dispathGroup.leave()
+                        })
+                    }
+                }
+                dispathGroup.notify(queue: .main, execute: {
+                    completion(results, nil)
+                })
+        }, withCancel: { (err) in
+            completion([], err)
+        })
     }
 }
 

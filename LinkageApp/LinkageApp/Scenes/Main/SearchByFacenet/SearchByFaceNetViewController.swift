@@ -111,16 +111,18 @@ final class SearchByFaceNetViewController: BaseViewController {
     private func dataAvailable() {
         showAlertView(title: Message.dataAvailable,
                       message: Message.reuseMS,
-                      cancelButton: "No",
-                      otherButtons: ["Yes"],
-                      cancelAction: { [weak self] in
-                        let imagePickerController = ImagePickerController().then {
-                            $0.imageLimit = 3
-                            $0.delegate = self
-                        }
-                        self?.present(imagePickerController, animated: true, completion: nil)
-        }, otherAction: { (_) in
-            self.getData()
+                      cancelButton: "Cancel",
+                      otherButtons: ["Yes", Message.slOtherImageMS],
+                      otherAction: { (id) in
+            if id == 0 {
+                self.getData()
+            } else {
+                let imagePickerController = ImagePickerController().then {
+                    $0.imageLimit = 3
+                    $0.delegate = self
+                }
+                self.present(imagePickerController, animated: true, completion: nil)
+            }
         })
     }
     

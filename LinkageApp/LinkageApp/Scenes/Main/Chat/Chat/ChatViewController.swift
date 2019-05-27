@@ -166,7 +166,7 @@ extension ChatViewController {
         self.collectionView.reloadData()
         if scrollbottom {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.collectionView.scrollToBottom(animated: true)
+                self.collectionView.scrollToBottom()
             }
             collectionView.layoutTypingLabelIfNeeded()
         } else if !messages.isEmpty {
